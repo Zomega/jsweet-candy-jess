@@ -1,0 +1,14 @@
+{
+  "candies": [
+    {
+      "name": "jsweet-core",
+      "version": "6.3.1-SNAPSHOT",
+      "lastUpdateTimestamp": 1751410802000,
+      "modelVersion": "unknown",
+      "transpilerVersion": "${jsweet.transpiler.version}",
+      "jsOutputDirPath": "/home/woursler/Code/cuttheknot/jsweet-candy-jess/.jsweet/candies/js",
+      "jsDirPath": "META-INF/resources/webjars/jsweet-core/6.3.1-SNAPSHOT",
+      "jsFilesPaths": []
+    }
+  ]
+}

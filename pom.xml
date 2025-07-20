@@ -1,36 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>myCandyGroup</groupId>
-  <artifactId>myCandy</artifactId>
+  <groupId>jessCandyGroup</groupId>
+  <artifactId>jessCandy</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<jsweet.transpiler.version>1.1.1</jsweet.transpiler.version>
 	</properties>
 	<repositories>
-		<repository>
-			<id>jsweet-central</id>
-			<name>libs-release</name>
-			<url>http://repository.jsweet.org/artifactory/libs-release-local</url>
-		</repository>
-		<repository>
-			<snapshots />
-			<id>jsweet-snapshots</id>
-			<name>libs-snapshot</name>
-			<url>http://repository.jsweet.org/artifactory/libs-snapshot-local</url>
-		</repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
-			<id>jsweet-plugins-release</id>
-			<name>plugins-release</name>
-			<url>http://repository.jsweet.org/artifactory/plugins-release-local</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots />
-			<id>jsweet-plugins-snapshots</id>
-			<name>plugins-snapshot</name>
-			<url>http://repository.jsweet.org/artifactory/plugins-snapshot-local</url>
-		</pluginRepository>
 	</pluginRepositories>
 	<build>
 		<resources>
@@ -52,9 +30,11 @@
 			<plugin>
 				<groupId>org.jsweet</groupId>
 				<artifactId>jsweet-maven-plugin</artifactId>
-				<version>1.2.0-SNAPSHOT</version>
+				<version>3.2.0-SNAPSHOT</version>
 				<configuration>
-					<!-- <verbose>true</verbose> -->
+					<verbose>true</verbose>
+					<debug>true</debug>
+				  <assertions>true</assertions>
 					<bundle>true</bundle>
 					<declaration>true</declaration>
 					<outDir>src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}</outDir>
@@ -134,10 +114,15 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.jsweet.candies</groupId>
+			<groupId>org.jsweet</groupId>
 			<artifactId>jsweet-core</artifactId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>6.3.1-SNAPSHOT</version>
 		</dependency>
+		<!--dependency>
+			<groupId>org.jsweet.candies.j4ts</groupId>
+			<artifactId>j4ts-awt-swing</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency-->
 	</dependencies>
 
 </project>
