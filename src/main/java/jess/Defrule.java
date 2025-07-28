@@ -46,19 +46,27 @@ public class Defrule extends Context {
     for (byte b = 0; b < paramPattern.m_tests.length; b++) {
       if (paramPattern.m_tests[b] != null)
         for (byte b1 = 0; b1 < (paramPattern.m_tests[b]).length; b1++) {
-          if (((paramPattern.m_tests[b][b1]).m_slotValue.type() == 8 || (paramPattern.m_tests[b][b1]).m_slotValue.type() == 8192) && findBinding((paramPattern.m_tests[b][b1]).m_slotValue.variableValue()) == null)
+          if (((paramPattern.m_tests[b][b1]).m_slotValue.type() == 8
+                  || (paramPattern.m_tests[b][b1]).m_slotValue.type() == 8192)
+              && findBinding((paramPattern.m_tests[b][b1]).m_slotValue.variableValue()) == null)
             if ((paramPattern.m_tests[b][b1]).m_test == 0) {
-              addBinding((paramPattern.m_tests[b][b1]).m_slotValue.variableValue(), this.m_patts.size() - 1, 3 + b, (paramPattern.m_tests[b][b1]).m_subIdx);
+              addBinding(
+                  (paramPattern.m_tests[b][b1]).m_slotValue.variableValue(),
+                  this.m_patts.size() - 1,
+                  3 + b,
+                  (paramPattern.m_tests[b][b1]).m_subIdx);
             } else {
-              throw new ReteException("Defrule::AddPattern", "First reference to variable negated", (paramPattern.m_tests[b][b1]).m_slotValue.toString());
+              throw new ReteException(
+                  "Defrule::AddPattern",
+                  "First reference to variable negated",
+                  (paramPattern.m_tests[b][b1]).m_slotValue.toString());
             }
         }
     }
   }
 
   void freeze() {
-    if (this.m_frozen)
-      return;
+    if (this.m_frozen) return;
     this.m_frozen = true;
     this.m_localActions = new Funcall[this.m_actions.size()];
     for (byte b = 0; b < this.m_localActions.length; b++)
@@ -80,14 +88,14 @@ public class Defrule extends Context {
             ValueVector valueVector1 = valueVector.get(binding.m_slotIndex).listValue();
             binding.m_val = valueVector1.get(binding.m_subIndex);
           }
-        } catch (Throwable throwable) {}
+        } catch (Throwable throwable) {
+        }
       }
     }
   }
 
   void fire(Token paramToken) throws ReteException {
-    if (this.m_engine.watchRules())
-      debugPrint(paramToken);
+    if (this.m_engine.watchRules()) debugPrint(paramToken);
     push();
     clearReturnValue();
     ready(paramToken);
@@ -112,8 +120,7 @@ public class Defrule extends Context {
       ValueVector valueVector = paramToken.fact(b);
       if (valueVector.get(2).factIDValue() != -1)
         printStream.print(" f-" + valueVector.get(2).factIDValue());
-      if (b < paramToken.size() - 1)
-        printStream.print(",");
+      if (b < paramToken.size() - 1) printStream.print(",");
     }
     printStream.println();
   }
@@ -123,8 +130,7 @@ public class Defrule extends Context {
     stringBuffer.append("[Defrule: ");
     stringBuffer.append(RU.getAtom(this.m_name));
     stringBuffer.append(" ");
-    if (this.m_docstring != null)
-      stringBuffer.append("\"" + this.m_docstring + "\"; ");
+    if (this.m_docstring != null) stringBuffer.append("\"" + this.m_docstring + "\"; ");
     stringBuffer.append(this.m_patts.size());
     stringBuffer.append(" patterns; salience: ");
     stringBuffer.append(this.m_salience);
@@ -135,7 +141,7 @@ public class Defrule extends Context {
   public String listNodes() {
     StringBuffer stringBuffer = new StringBuffer(100);
     for (byte b = 0; b < this.m_nodes.size(); b++) {
-      stringBuffer.append(((Successor)this.m_nodes.elementAt(b)).m_node);
+      stringBuffer.append(((Successor) this.m_nodes.elementAt(b)).m_node);
       stringBuffer.append("\n");
     }
     return stringBuffer.toString();
@@ -153,7 +159,7 @@ public class Defrule extends Context {
         paramVector.removeElement(successor);
         Enumeration enumeration1 = this.m_nodes.elements();
         while (enumeration1.hasMoreElements()) {
-          Node node = ((Successor)enumeration1.nextElement()).m_node;
+          Node node = ((Successor) enumeration1.nextElement()).m_node;
           node.removeSuccessor(successor);
         }
       }

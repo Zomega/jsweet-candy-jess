@@ -12,7 +12,8 @@ final class JessToken {
 
   int m_ttype;
 
-  static final JessToken create(StreamTokenizer paramStreamTokenizer, TextInputStream paramTextInputStream) {
+  static final JessToken create(
+      StreamTokenizer paramStreamTokenizer, TextInputStream paramTextInputStream) {
     try {
       int i = paramTextInputStream.mark();
       paramStreamTokenizer.nextToken();
@@ -77,7 +78,7 @@ final class JessToken {
       case 2:
         return new Value(this.m_sval, 2);
     }
-    return new Value(RU.putAtom("" + (char)this.m_ttype), 2);
+    return new Value(RU.putAtom("" + (char) this.m_ttype), 2);
   }
 
   boolean isBlankVariable() {
@@ -85,6 +86,18 @@ final class JessToken {
   }
 
   public String toString() {
-    return (this.m_ttype == 8) ? ("?" + this.m_sval) : ((this.m_ttype == 8192) ? ("$?" + this.m_sval) : ((this.m_ttype == 2) ? ("\"" + this.m_sval + "\"") : ((this.m_sval != null) ? this.m_sval : ((this.m_ttype == 32) ? ("" + this.m_nval) : ((this.m_ttype == 4) ? ("" + (int)this.m_nval) : ("" + (char)this.m_ttype))))));
+    return (this.m_ttype == 8)
+        ? ("?" + this.m_sval)
+        : ((this.m_ttype == 8192)
+            ? ("$?" + this.m_sval)
+            : ((this.m_ttype == 2)
+                ? ("\"" + this.m_sval + "\"")
+                : ((this.m_sval != null)
+                    ? this.m_sval
+                    : ((this.m_ttype == 32)
+                        ? ("" + this.m_nval)
+                        : ((this.m_ttype == 4)
+                            ? ("" + (int) this.m_nval)
+                            : ("" + (char) this.m_ttype))))));
   }
 }

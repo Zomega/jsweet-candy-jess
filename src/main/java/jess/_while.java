@@ -10,9 +10,9 @@ class _while implements Userfunction {
     if (value.type() == 64)
       value = Funcall.execute(paramContext.expandAction(value.funcallValue()), paramContext);
     byte b = 0;
-    if (paramValueVector.get(2).equals(Funcall.s_do))
-      b++;
-    label26: while (!value.equals(Funcall.s_false)) {
+    if (paramValueVector.get(2).equals(Funcall.s_do)) b++;
+    label26:
+    while (!value.equals(Funcall.s_false)) {
       for (int i = 2 + b; i < paramValueVector.size(); i++) {
         Value value1 = paramValueVector.get(i);
         if (value1.type() == 64) {

@@ -29,21 +29,19 @@ public class TextInputStream extends InputStream {
     while (this.m_ptr >= this.m_buf.length()) {
       if (this.m_source != null) {
         String str = this.m_source.readLine();
-        if (str == null)
-          return -1;
+        if (str == null) return -1;
         appendText(str);
         appendText("\n");
         continue;
       }
-      if (this.m_dontWait)
-        return -1;
+      if (this.m_dontWait) return -1;
       try {
         wait(100L);
-      } catch (InterruptedException interruptedException) {}
+      } catch (InterruptedException interruptedException) {
+      }
     }
     char c = this.m_buf.charAt(this.m_ptr++);
-    if (this.m_ptr >= this.m_buf.length())
-      clear();
+    if (this.m_ptr >= this.m_buf.length()) clear();
     return c;
   }
 
@@ -57,8 +55,7 @@ public class TextInputStream extends InputStream {
   }
 
   public synchronized void clear() {
-    if (this.m_markActive)
-      return;
+    if (this.m_markActive) return;
     this.m_buf.setLength(0);
     this.m_ptr = 0;
   }
@@ -71,8 +68,7 @@ public class TextInputStream extends InputStream {
   boolean seenSince(int paramInt, char paramChar) {
     this.m_markActive = false;
     for (int i = paramInt; i < this.m_ptr; i++) {
-      if (this.m_buf.charAt(i) == paramChar)
-        return true;
+      if (this.m_buf.charAt(i) == paramChar) return true;
     }
     return false;
   }

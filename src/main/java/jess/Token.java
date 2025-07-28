@@ -18,8 +18,7 @@ class Token {
   final ValueVector fact(int paramInt) {
     Token token = this;
     int i = this.m_size - paramInt;
-    while (--i > 0)
-      token = token.m_parent;
+    while (--i > 0) token = token.m_parent;
     return token.m_fact;
   }
 
@@ -65,7 +64,13 @@ class Token {
   }
 
   public final boolean dataEquals(Token paramToken) {
-    return (this.m_sortcode != paramToken.m_sortcode) ? false : (!this.m_fact.equals(paramToken.m_fact) ? false : ((this.m_parent == null || this.m_parent == paramToken.m_parent) ? true : this.m_parent.dataEquals(paramToken.m_parent)));
+    return (this.m_sortcode != paramToken.m_sortcode)
+        ? false
+        : (!this.m_fact.equals(paramToken.m_fact)
+            ? false
+            : ((this.m_parent == null || this.m_parent == paramToken.m_parent)
+                ? true
+                : this.m_parent.dataEquals(paramToken.m_parent)));
   }
 
   public String toString() {

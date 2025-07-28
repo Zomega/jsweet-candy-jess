@@ -25,7 +25,8 @@ class _call implements Userfunction {
       if (value.type() == 2 || value.type() == 1)
         try {
           clazz = Class.forName(value.stringValue());
-        } catch (ClassNotFoundException classNotFoundException) {}
+        } catch (ClassNotFoundException classNotFoundException) {
+        }
       if (clazz == null) {
         object1 = value.externalAddressValue();
         clazz = object1.getClass();
@@ -40,17 +41,22 @@ class _call implements Userfunction {
           Class[] arrayOfClass = method.getParameterTypes();
           if (method.getName().equals(str) && i == arrayOfClass.length) {
             for (byte b1 = 0; b1 < i; b1++)
-              arrayOfObject[b1] = ReflectFunctions.valueToObject(arrayOfClass[b1], paramValueVector.get(b1 + 3));
+              arrayOfObject[b1] =
+                  ReflectFunctions.valueToObject(arrayOfClass[b1], paramValueVector.get(b1 + 3));
             object2 = method.invoke(object1, arrayOfObject);
             return ReflectFunctions.objectToValue(method.getReturnType(), object2);
           }
-        } catch (IllegalArgumentException illegalArgumentException) {}
+        } catch (IllegalArgumentException illegalArgumentException) {
+        }
       }
       throw new NoSuchMethodException(str);
     } catch (NoSuchMethodException noSuchMethodException) {
       throw new ReteException("call", "No method '" + str + "' found", "or invalid argument types");
     } catch (InvocationTargetException invocationTargetException) {
-      throw new ReteException("call", "Called method threw an exception", invocationTargetException.getTargetException().toString());
+      throw new ReteException(
+          "call",
+          "Called method threw an exception",
+          invocationTargetException.getTargetException().toString());
     } catch (IllegalAccessException illegalAccessException) {
       throw new ReteException("call", "Method is not accessible", str);
     } catch (IllegalArgumentException illegalArgumentException) {

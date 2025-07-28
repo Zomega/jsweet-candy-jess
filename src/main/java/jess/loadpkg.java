@@ -10,7 +10,7 @@ class loadpkg implements Userfunction {
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     String str = paramValueVector.get(1).stringValue();
     try {
-      Userpackage userpackage = (Userpackage)Class.forName(str).newInstance();
+      Userpackage userpackage = (Userpackage) Class.forName(str).newInstance();
       paramContext.engine().addUserpackage(userpackage);
     } catch (ClassNotFoundException classNotFoundException) {
       throw new ReteException("load-package", "Class not found", str);

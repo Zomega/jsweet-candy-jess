@@ -65,8 +65,7 @@ class JessTokenStream {
     this.m_string.setLength(0);
     JessToken jessToken = JessToken.create(this.m_stream, this.m_source);
     if (jessToken.m_ttype != 40) {
-      if (jessToken.m_ttype != 0)
-        this.m_loner = jessToken.tokenToValue();
+      if (jessToken.m_ttype != 0) this.m_loner = jessToken.tokenToValue();
       return false;
     }
     this.m_loner = null;
@@ -75,24 +74,20 @@ class JessTokenStream {
     while (!b) {
       jessToken = JessToken.create(this.m_stream, this.m_source);
       stack.push(jessToken);
-      if (jessToken.m_ttype == 0)
-        return false;
+      if (jessToken.m_ttype == 0) return false;
       if (jessToken.m_ttype == 41) {
         b--;
         continue;
       }
-      if (jessToken.m_ttype == 40)
-        b++;
+      if (jessToken.m_ttype == 40) b++;
     }
-    while (!stack.empty())
-      this.m_stack.push(stack.pop());
+    while (!stack.empty()) this.m_stack.push(stack.pop());
     this.m_source.clear();
     return true;
   }
 
   JessToken nextToken() throws ReteException {
-    if (this.m_stack.empty() && !prepareSexp())
-      return null;
+    if (this.m_stack.empty() && !prepareSexp()) return null;
     JessToken jessToken = this.m_stack.pop();
     this.m_string.append(jessToken.toString() + " ");
     this.m_lineno = jessToken.m_lineno;
@@ -106,12 +101,17 @@ class JessTokenStream {
   }
 
   String head() throws ReteException {
-    if (this.m_stack.empty() && !prepareSexp())
-      return null;
+    if (this.m_stack.empty() && !prepareSexp()) return null;
     JessToken jessToken1 = this.m_stack.pop();
     JessToken jessToken2 = this.m_stack.peek();
     this.m_stack.push(jessToken1);
-    return (jessToken2.m_ttype != 1) ? ((jessToken2.m_ttype == 45) ? "-" : ((jessToken2.m_ttype == 61) ? "=" : ((jessToken2.m_ttype == 8) ? jessToken2.m_sval : jessToken2.toString()))) : ((jessToken2.m_sval != null) ? jessToken2.m_sval : jessToken2.toString());
+    return (jessToken2.m_ttype != 1)
+        ? ((jessToken2.m_ttype == 45)
+            ? "-"
+            : ((jessToken2.m_ttype == 61)
+                ? "="
+                : ((jessToken2.m_ttype == 8) ? jessToken2.m_sval : jessToken2.toString())))
+        : ((jessToken2.m_sval != null) ? jessToken2.m_sval : jessToken2.toString());
   }
 
   void clear() {

@@ -48,9 +48,9 @@ public final class Value {
   }
 
   public int[] intArrayValue() throws ReteException {
-    if (this.m_type == 4096)
-      return (int[])this.m_objectval;
-    throw new ReteException("Value::intArrayValue", "Not an int[]: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 4096) return (int[]) this.m_objectval;
+    throw new ReteException(
+        "Value::intArrayValue", "Not an int[]: " + toString(), "type = " + this.m_type);
   }
 
   public final Object externalAddressValue() throws ReteException {
@@ -61,47 +61,48 @@ public final class Value {
       case 2:
         return stringValue().intern();
     }
-    throw new ReteException("Value::externalAddressValue", "Not an external address: " + toString(), "type = " + this.m_type);
+    throw new ReteException(
+        "Value::externalAddressValue",
+        "Not an external address: " + toString(),
+        "type = " + this.m_type);
   }
 
   public final Funcall funcallValue() throws ReteException {
-    if (this.m_type == 64)
-      return (Funcall)this.m_objectval;
-    throw new ReteException("Value::funcallValue", "Not a Funcall: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 64) return (Funcall) this.m_objectval;
+    throw new ReteException(
+        "Value::funcallValue", "Not a Funcall: " + toString(), "type = " + this.m_type);
   }
 
   public final ValueVector factValue() throws ReteException {
-    if (this.m_type == 128 || this.m_type == 256)
-      return (ValueVector)this.m_objectval;
-    throw new ReteException("Value::factValue", "Not a Fact: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 128 || this.m_type == 256) return (ValueVector) this.m_objectval;
+    throw new ReteException(
+        "Value::factValue", "Not a Fact: " + toString(), "type = " + this.m_type);
   }
 
   public final ValueVector listValue() throws ReteException {
-    if (this.m_type == 512)
-      return (ValueVector)this.m_objectval;
-    throw new ReteException("Value::listValue", "Not a List: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 512) return (ValueVector) this.m_objectval;
+    throw new ReteException(
+        "Value::listValue", "Not a List: " + toString(), "type = " + this.m_type);
   }
 
   public final double numericValue() throws ReteException {
-    if (this.m_type == 32)
-      return this.m_floatval;
-    if (this.m_type == 4)
-      return this.m_intval;
-    throw new ReteException("Value::numericValue", "Not a number: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 32) return this.m_floatval;
+    if (this.m_type == 4) return this.m_intval;
+    throw new ReteException(
+        "Value::numericValue", "Not a number: " + toString(), "type = " + this.m_type);
   }
 
   public final int descriptorValue() throws ReteException {
-    if (this.m_type == 1024)
-      return this.m_intval;
-    throw new ReteException("Value::descriptorValue", "Not a descriptor: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 1024) return this.m_intval;
+    throw new ReteException(
+        "Value::descriptorValue", "Not a descriptor: " + toString(), "type = " + this.m_type);
   }
 
   public final int intValue() throws ReteException {
-    if (this.m_type == 4)
-      return this.m_intval;
-    if (this.m_type == 32)
-      return (int)this.m_floatval;
-    throw new ReteException("Value::intValue", "Not a number: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 4) return this.m_intval;
+    if (this.m_type == 32) return (int) this.m_floatval;
+    throw new ReteException(
+        "Value::intValue", "Not a number: " + toString(), "type = " + this.m_type);
   }
 
   public final double floatValue() throws ReteException {
@@ -109,37 +110,35 @@ public final class Value {
   }
 
   public final String stringValue() throws ReteException {
-    if ((this.m_type & 0xE00B) != 0)
-      return RU.getAtom(this.m_intval);
-    throw new ReteException("Value::stringValue", "Not a string: " + toString(), "type = " + this.m_type);
+    if ((this.m_type & 0xE00B) != 0) return RU.getAtom(this.m_intval);
+    throw new ReteException(
+        "Value::stringValue", "Not a string: " + toString(), "type = " + this.m_type);
   }
 
   public final int atomValue() throws ReteException {
-    if ((this.m_type & 0xE00B) != 0)
-      return this.m_intval;
-    throw new ReteException("Value::atomValue", "Not an atom: " + toString(), "type = " + this.m_type);
+    if ((this.m_type & 0xE00B) != 0) return this.m_intval;
+    throw new ReteException(
+        "Value::atomValue", "Not an atom: " + toString(), "type = " + this.m_type);
   }
 
   public final int variableValue() throws ReteException {
-    if (this.m_type == 8 || this.m_type == 8192)
-      return this.m_intval;
-    throw new ReteException("Value::variableValue", "Not a Variable: " + toString(), "type = " + this.m_type);
+    if (this.m_type == 8 || this.m_type == 8192) return this.m_intval;
+    throw new ReteException(
+        "Value::variableValue", "Not a Variable: " + toString(), "type = " + this.m_type);
   }
 
   public final int factIDValue() throws ReteException {
-    if ((this.m_type & 0x34) != 0)
-      return this.m_intval;
-    throw new ReteException("Value::factIDValue", "Not a Fact-ID: " + toString(), "type = " + this.m_type);
+    if ((this.m_type & 0x34) != 0) return this.m_intval;
+    throw new ReteException(
+        "Value::factIDValue", "Not a Fact-ID: " + toString(), "type = " + this.m_type);
   }
 
   private String escape(String paramString) {
-    if (paramString.indexOf('"') == -1)
-      return paramString;
+    if (paramString.indexOf('"') == -1) return paramString;
     StringBuffer stringBuffer = new StringBuffer();
     for (byte b = 0; b < paramString.length(); b++) {
       char c = paramString.charAt(b);
-      if (c == '"' || c == '\\')
-        stringBuffer.append('\\');
+      if (c == '"' || c == '\\') stringBuffer.append('\\');
       stringBuffer.append(c);
     }
     return stringBuffer.toString();
@@ -172,7 +171,7 @@ public final class Value {
       case 512:
         return this.m_objectval.toString();
       case 4096:
-        arrayOfInt = (int[])this.m_objectval;
+        arrayOfInt = (int[]) this.m_objectval;
         return "?" + arrayOfInt[0] + "," + arrayOfInt[1] + "," + arrayOfInt[2];
       case 2048:
         return "<External-Address:" + this.m_objectval.getClass().getName() + ">";
@@ -195,13 +194,13 @@ public final class Value {
       case 32768:
         return this.m_intval;
       case 32:
-        return (int)this.m_floatval;
+        return (int) this.m_floatval;
       case 64:
       case 128:
       case 256:
-        return (((ValueVector)this.m_objectval).get(0)).m_intval;
+        return (((ValueVector) this.m_objectval).get(0)).m_intval;
       case 512:
-        return ((ValueVector)this.m_objectval).get(0).sortCode();
+        return ((ValueVector) this.m_objectval).get(0).sortCode();
     }
     return 0;
   }
@@ -211,18 +210,27 @@ public final class Value {
   }
 
   public final boolean equals(Object paramObject) {
-    return (paramObject instanceof Value) ? equals((Value)paramObject) : false;
+    return (paramObject instanceof Value) ? equals((Value) paramObject) : false;
   }
 
   public final boolean equals(Value paramValue) {
-    if (this == paramValue)
-      return true;
+    if (this == paramValue) return true;
     int i = this.m_type;
-    return (paramValue.m_type != i) ? false : (((i & 0xE41F) != 0) ? ((this.m_intval == paramValue.m_intval)) : ((i == 32) ? ((this.m_floatval == paramValue.m_floatval)) : this.m_objectval.equals(paramValue.m_objectval)));
+    return (paramValue.m_type != i)
+        ? false
+        : (((i & 0xE41F) != 0)
+            ? ((this.m_intval == paramValue.m_intval))
+            : ((i == 32)
+                ? ((this.m_floatval == paramValue.m_floatval))
+                : this.m_objectval.equals(paramValue.m_objectval)));
   }
 
   public final boolean equalsStar(Value paramValue) throws ReteException {
-    return (this == paramValue) ? true : (((this.m_type & 0x24) != 0 && (paramValue.m_type & 0x24) != 0) ? ((numericValue() == paramValue.numericValue())) : equals(paramValue));
+    return (this == paramValue)
+        ? true
+        : (((this.m_type & 0x24) != 0 && (paramValue.m_type & 0x24) != 0)
+            ? ((numericValue() == paramValue.numericValue()))
+            : equals(paramValue));
   }
 
   final Value resetValue(int paramInt1, int paramInt2) throws ReteException {
@@ -275,14 +283,15 @@ public final class Value {
     if (paramInt == 32) {
       this.m_floatval = paramDouble;
     } else {
-      this.m_intval = (int)paramDouble;
+      this.m_intval = (int) paramDouble;
     }
     return this;
   }
 
   final Value resetValue(Object paramObject, int paramInt) throws ReteException {
     if (paramInt != 2048)
-      throw new ReteException("Value::Value", "Not an External Address type", "type = " + this.m_type);
+      throw new ReteException(
+          "Value::Value", "Not an External Address type", "type = " + this.m_type);
     this.m_type = paramInt;
     this.m_objectval = paramObject;
     return this;

@@ -35,8 +35,7 @@ public class Deffacts {
     stringBuffer.append("[Deffacts: ");
     stringBuffer.append(RU.getAtom(this.m_name));
     stringBuffer.append(" ");
-    if (this.m_docstring != null)
-      stringBuffer.append("\"" + this.m_docstring + "\"; ");
+    if (this.m_docstring != null) stringBuffer.append("\"" + this.m_docstring + "\"; ");
     stringBuffer.append(this.m_facts.size());
     stringBuffer.append(" facts");
     stringBuffer.append("]");

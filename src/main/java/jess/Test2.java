@@ -31,7 +31,12 @@ class Test2 {
   }
 
   boolean equals(Test2 paramTest2) {
-    return (this.m_test == paramTest2.m_test && this.m_tokenIdx == paramTest2.m_tokenIdx && this.m_rightIdx == paramTest2.m_rightIdx && this.m_leftIdx == paramTest2.m_leftIdx && this.m_rightSubIdx == paramTest2.m_rightSubIdx && this.m_leftSubIdx == paramTest2.m_leftSubIdx);
+    return (this.m_test == paramTest2.m_test
+        && this.m_tokenIdx == paramTest2.m_tokenIdx
+        && this.m_rightIdx == paramTest2.m_rightIdx
+        && this.m_leftIdx == paramTest2.m_leftIdx
+        && this.m_rightSubIdx == paramTest2.m_rightSubIdx
+        && this.m_leftSubIdx == paramTest2.m_leftSubIdx);
   }
 
   public String toString() {

@@ -29,7 +29,7 @@ class defclass implements Userfunction, Clearable {
   }
 
   String jessNameToJavaName(String paramString) {
-    return (String)this.m_javaClasses.get(paramString);
+    return (String) this.m_javaClasses.get(paramString);
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
@@ -40,7 +40,8 @@ class defclass implements Userfunction, Clearable {
       this.m_javaClasses.put(str1, str2);
       Deftemplate deftemplate = new Deftemplate(str1, 256);
       deftemplate.docstring("$JAVA-OBJECT$ " + str2);
-      PropertyDescriptor[] arrayOfPropertyDescriptor = Introspector.getBeanInfo(clazz).getPropertyDescriptors();
+      PropertyDescriptor[] arrayOfPropertyDescriptor =
+          Introspector.getBeanInfo(clazz).getPropertyDescriptors();
       for (byte b = 0; b < arrayOfPropertyDescriptor.length; b++) {
         Method method = arrayOfPropertyDescriptor[b].getReadMethod();
         if (method != null) {
@@ -59,7 +60,8 @@ class defclass implements Userfunction, Clearable {
     } catch (ClassNotFoundException classNotFoundException) {
       throw new ReteException("defclass", "Class not found:", str2);
     } catch (IntrospectionException introspectionException) {
-      throw new ReteException("defclass", "Introspection error:", introspectionException.toString());
+      throw new ReteException(
+          "defclass", "Introspection error:", introspectionException.toString());
     }
   }
 }

@@ -33,8 +33,7 @@ class NetworkViewer extends Panel implements Observer {
     add("South", this.m_lbl = new Label());
     ReteCompiler rc = this.m_engine.compiler();
     Vector roots = rc.roots();
-    for (int i = 0; i < roots.size(); i++)
-      buildNetwork(((Successor)roots.elementAt(i)).m_node, 1);
+    for (int i = 0; i < roots.size(); i++) buildNetwork(((Successor) roots.elementAt(i)).m_node, 1);
     message("Network complete");
   }
 
@@ -43,20 +42,19 @@ class NetworkViewer extends Panel implements Observer {
       this.m_doneNodes = new Hashtable();
       this.m_rows = new Vector();
       for (int j = 0; j < this.m_engine.compiler().roots().size(); j++)
-        buildNetwork(((Successor)this.m_engine.compiler().roots().elementAt(j)).m_node, 1);
+        buildNetwork(((Successor) this.m_engine.compiler().roots().elementAt(j)).m_node, 1);
       message("Network complete");
       repaint();
     }
     for (int i = 0; i < this.m_frames.size(); i++)
-      ((NodeView)this.m_frames.elementAt(i)).describeNode();
+      ((NodeView) this.m_frames.elementAt(i)).describeNode();
   }
 
   NodeView buildNetwork(Node n, int depth) {
     Vector vector;
     message("Building at depth " + depth);
     NodeView nv;
-    if ((nv = (NodeView)this.m_doneNodes.get(n)) != null)
-      return nv;
+    if ((nv = (NodeView) this.m_doneNodes.get(n)) != null) return nv;
     if (this.m_rows.size() < depth) {
       vector = new Vector();
       this.m_rows.addElement(vector);
@@ -89,11 +87,9 @@ class NetworkViewer extends Panel implements Observer {
       int rowidx = y / 20;
       int colidx = (x - rowidx % 2 * 10) / 20;
       message("No node in row " + rowidx + ", col " + colidx);
-      if (this.m_rows.size() < rowidx + 1)
-        return false;
+      if (this.m_rows.size() < rowidx + 1) return false;
       Vector row = this.m_rows.elementAt(rowidx);
-      if (row.size() < colidx + 1)
-        return false;
+      if (row.size() < colidx + 1) return false;
       NodeView nv = row.elementAt(colidx);
       nv.fullDisplay();
       message("OPEN!");
@@ -107,11 +103,9 @@ class NetworkViewer extends Panel implements Observer {
     int rowidx = y / 20;
     int colidx = (x - rowidx % 2 * 10) / 20;
     message("No node in row " + rowidx + ", col " + colidx);
-    if (this.m_rows.size() < rowidx + 1)
-      return false;
+    if (this.m_rows.size() < rowidx + 1) return false;
     Vector row = this.m_rows.elementAt(rowidx);
-    if (row.size() < colidx + 1)
-      return false;
+    if (row.size() < colidx + 1) return false;
     NodeView nv = row.elementAt(colidx);
     nv.textDisplay(this);
     return true;

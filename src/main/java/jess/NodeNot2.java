@@ -20,21 +20,19 @@ public class NodeNot2 extends Node2 {
     }
   }
 
-  private void doRunTestsVaryRight(Token paramToken, TokenHolder paramTokenHolder) throws ReteException {
-    if (paramTokenHolder == null)
-      return;
+  private void doRunTestsVaryRight(Token paramToken, TokenHolder paramTokenHolder)
+      throws ReteException {
+    if (paramTokenHolder == null) return;
     doRunTestsVaryRight(paramToken, paramTokenHolder.m_left);
     doRunTestsVaryRight(paramToken, paramTokenHolder.m_right);
     for (Token token = paramTokenHolder.m_token; token != null; token = token.m_next) {
       Token token1 = new Token(paramToken, token.fact(0));
-      if (runTests(paramToken, token, token1))
-        paramToken.m_negcnt++;
+      if (runTests(paramToken, token, token1)) paramToken.m_negcnt++;
     }
   }
 
   void runTestsVaryLeft(Token paramToken, TokenHolder paramTokenHolder) throws ReteException {
-    if (paramTokenHolder == null)
-      return;
+    if (paramTokenHolder == null) return;
     runTestsVaryLeft(paramToken, paramTokenHolder.m_left);
     runTestsVaryLeft(paramToken, paramTokenHolder.m_right);
     for (Token token = paramTokenHolder.m_token; token != null; token = token.m_next) {
@@ -76,6 +74,7 @@ public class NodeNot2 extends Node2 {
       valueVector.set(new Value(128, 1024), 1);
       valueVector.set(new Value(-1, 16), 2);
       s_nullToken = new Token(0, valueVector);
-    } catch (ReteException reteException) {}
+    } catch (ReteException reteException) {
+    }
   }
 }

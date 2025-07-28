@@ -22,8 +22,7 @@ class _field implements Userfunction {
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     String str = paramValueVector.get(2).stringValue();
     boolean bool = false;
-    if (paramValueVector.get(0).stringValue().equals("set-member"))
-      bool = true;
+    if (paramValueVector.get(0).stringValue().equals("set-member")) bool = true;
     Class clazz = null;
     Object object = null;
     Value value = paramValueVector.get(1);
@@ -31,7 +30,8 @@ class _field implements Userfunction {
       try {
         clazz = Class.forName(value.stringValue());
       } catch (ClassNotFoundException classNotFoundException) {
-        throw new ReteException(paramValueVector.get(0).stringValue(), "No such class", value.stringValue());
+        throw new ReteException(
+            paramValueVector.get(0).stringValue(), "No such class", value.stringValue());
       }
     if (clazz == null) {
       object = value.externalAddressValue();
@@ -47,11 +47,20 @@ class _field implements Userfunction {
       Object object1 = field.get(object);
       return ReflectFunctions.objectToValue(clazz1, object1);
     } catch (NoSuchFieldException noSuchFieldException) {
-      throw new ReteException(paramValueVector.get(0).stringValue(), "No such field " + paramValueVector.get(2).stringValue() + " in class ", clazz.getName());
+      throw new ReteException(
+          paramValueVector.get(0).stringValue(),
+          "No such field " + paramValueVector.get(2).stringValue() + " in class ",
+          clazz.getName());
     } catch (IllegalAccessException illegalAccessException) {
-      throw new ReteException(paramValueVector.get(0).stringValue(), "Field is not accessible", paramValueVector.get(2).stringValue());
+      throw new ReteException(
+          paramValueVector.get(0).stringValue(),
+          "Field is not accessible",
+          paramValueVector.get(2).stringValue());
     } catch (IllegalArgumentException illegalArgumentException) {
-      throw new ReteException(paramValueVector.get(0).stringValue(), "Invalid argument", paramValueVector.get(1).toString());
+      throw new ReteException(
+          paramValueVector.get(0).stringValue(),
+          "Invalid argument",
+          paramValueVector.get(1).toString());
     }
   }
 }

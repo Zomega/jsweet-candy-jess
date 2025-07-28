@@ -8,6 +8,7 @@ class strcompare implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    return new Value(paramValueVector.get(1).stringValue().compareTo(paramValueVector.get(2).stringValue()), 4);
+    return new Value(
+        paramValueVector.get(1).stringValue().compareTo(paramValueVector.get(2).stringValue()), 4);
   }
 }

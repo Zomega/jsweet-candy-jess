@@ -8,6 +8,8 @@ class lexemep implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    return (paramValueVector.get(1).type() == 1 || paramValueVector.get(1).type() == 2) ? Funcall.TRUE() : Funcall.FALSE();
+    return (paramValueVector.get(1).type() == 1 || paramValueVector.get(1).type() == 2)
+        ? Funcall.TRUE()
+        : Funcall.FALSE();
   }
 }

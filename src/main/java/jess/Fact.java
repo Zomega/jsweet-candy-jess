@@ -20,7 +20,7 @@ public class Fact {
     this.m_name = paramValueVector.get(0).atomValue();
     this.m_ordered = paramValueVector.get(1).descriptorValue();
     this.m_deft = findDeftemplate(RU.getAtom(this.m_name), this.m_ordered, paramRete);
-    this.m_fact = (ValueVector)paramValueVector.clone();
+    this.m_fact = (ValueVector) paramValueVector.clone();
   }
 
   private ValueVector createNewFact(ValueVector paramValueVector) {
@@ -38,14 +38,17 @@ public class Fact {
     return valueVector;
   }
 
-  private ValueVector findDeftemplate(String paramString, int paramInt, Rete paramRete) throws ReteException {
+  private ValueVector findDeftemplate(String paramString, int paramInt, Rete paramRete)
+      throws ReteException {
     ValueVector valueVector = paramRete.findDeftemplate(paramString);
     if (valueVector != null) {
       if (valueVector.get(1).descriptorValue() != paramInt)
-        throw new ReteException("Fact::findDeftemplate", "Attempt to duplicate implied deftemplate:", paramString);
+        throw new ReteException(
+            "Fact::findDeftemplate", "Attempt to duplicate implied deftemplate:", paramString);
     } else {
       if (paramInt == 256)
-        throw new ReteException("Fact::findDeftemplate", "Can't create implied unordered deftempl:", paramString);
+        throw new ReteException(
+            "Fact::findDeftemplate", "Can't create implied unordered deftempl:", paramString);
       valueVector = paramRete.addDeftemplate(new Deftemplate(paramString, paramInt));
     }
     return valueVector;
@@ -59,9 +62,11 @@ public class Fact {
     if (this.m_ordered == 128)
       throw new ReteException("Fact::FindSlot", "Attempt to find named slot in ordered fact", "");
     byte b;
-    for (b = 3; b < this.m_deft.size() && this.m_deft.get(b + 0).atomValue() != paramInt; b += 2);
+    for (b = 3; b < this.m_deft.size() && this.m_deft.get(b + 0).atomValue() != paramInt; b += 2)
+      ;
     if (b >= this.m_deft.size())
-      throw new ReteException("Fact::AddValue", "Attempt to add field with invalid slotname", RU.getAtom(paramInt));
+      throw new ReteException(
+          "Fact::AddValue", "Attempt to add field with invalid slotname", RU.getAtom(paramInt));
     return (b - 3) / 2 + 3;
   }
 
@@ -70,22 +75,26 @@ public class Fact {
     return this.m_fact.get(i);
   }
 
-  public final void addValue(String paramString1, String paramString2, int paramInt) throws ReteException {
+  public final void addValue(String paramString1, String paramString2, int paramInt)
+      throws ReteException {
     int i = findSlot(paramString1);
     this.m_fact.set(new Value(paramString2, paramInt), i);
   }
 
-  public final void addValue(String paramString, int paramInt1, int paramInt2) throws ReteException {
+  public final void addValue(String paramString, int paramInt1, int paramInt2)
+      throws ReteException {
     int i = findSlot(paramString);
     this.m_fact.set(new Value(paramInt1, paramInt2), i);
   }
 
-  public final void addValue(String paramString, double paramDouble, int paramInt) throws ReteException {
+  public final void addValue(String paramString, double paramDouble, int paramInt)
+      throws ReteException {
     int i = findSlot(paramString);
     this.m_fact.set(new Value(paramDouble, paramInt), i);
   }
 
-  public final void addValue(String paramString, Funcall paramFuncall, int paramInt) throws ReteException {
+  public final void addValue(String paramString, Funcall paramFuncall, int paramInt)
+      throws ReteException {
     int i = findSlot(paramString);
     this.m_fact.set(new Value(paramFuncall, paramInt), i);
   }

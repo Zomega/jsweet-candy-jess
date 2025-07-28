@@ -17,8 +17,7 @@ class _open implements Userfunction {
     String str1 = paramValueVector.get(1).stringValue();
     String str2 = paramValueVector.get(2).stringValue();
     String str3 = "r";
-    if (paramValueVector.size() > 3)
-      str3 = paramValueVector.get(3).stringValue();
+    if (paramValueVector.size() > 3) str3 = paramValueVector.get(3).stringValue();
     try {
       if (str3.equals("r")) {
         rete.addInputRouter(str2, new BufferedInputStream(new FileInputStream(str1)));

@@ -5,14 +5,14 @@ class _times extends Fastfunction {
     return RU.putAtom("*");
   }
 
-  public Value call(ValueVector paramValueVector, Context paramContext, Value paramValue) throws ReteException {
+  public Value call(ValueVector paramValueVector, Context paramContext, Value paramValue)
+      throws ReteException {
     double d = 1.0D;
     byte b1 = 4;
     for (byte b2 = 1; b2 < paramValueVector.size(); b2++) {
       Value value = paramValueVector.get(b2);
       d *= value.numericValue();
-      if (b1 == 4 && value.type() == 32)
-        b1 = 32;
+      if (b1 == 4 && value.type() == 32) b1 = 32;
     }
     return paramValue.resetValue(d, b1);
   }

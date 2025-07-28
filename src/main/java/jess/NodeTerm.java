@@ -30,8 +30,7 @@ public class NodeTerm extends Node {
     if (paramToken.m_tag == 2)
       for (byte b = 0; b < this.m_activations.size(); b++) {
         Activation activation1 = this.m_activations.elementAt(b);
-        if (activation1.m_token.dataEquals(paramToken))
-          return;
+        if (activation1.m_token.dataEquals(paramToken)) return;
       }
     Activation activation = new Activation(paramToken, this.m_rule, this);
     this.m_activations.addElement(activation);
@@ -43,8 +42,7 @@ public class NodeTerm extends Node {
     byte b;
     switch (paramToken.m_tag) {
       case 3:
-        for (i = 0; i < this.m_activations.size(); i++)
-          standDown(this.m_activations.elementAt(i));
+        for (i = 0; i < this.m_activations.size(); i++) standDown(this.m_activations.elementAt(i));
         break;
       case 0:
       case 2:

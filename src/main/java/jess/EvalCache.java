@@ -18,8 +18,7 @@ class EvalCache {
   }
 
   final synchronized void restoreValue(int paramInt) throws ReteException {
-    while (this.m_usedV.size() > paramInt)
-      this.m_newV.push(this.m_usedV.pop());
+    while (this.m_usedV.size() > paramInt) this.m_newV.push(this.m_usedV.pop());
   }
 
   final synchronized Funcall getFuncall() throws ReteException {
@@ -31,7 +30,6 @@ class EvalCache {
   }
 
   final synchronized void restoreFuncall(int paramInt) throws ReteException {
-    while (this.m_usedF.size() > paramInt)
-      this.m_newF.push(this.m_usedF.pop());
+    while (this.m_usedF.size() > paramInt) this.m_newF.push(this.m_usedF.pop());
   }
 }

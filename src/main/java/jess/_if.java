@@ -7,8 +7,7 @@ class _if implements Userfunction {
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     Value value = paramValueVector.get(1);
-    if (value.type() == 64)
-      value = Funcall.execute(value.funcallValue(), paramContext);
+    if (value.type() == 64) value = Funcall.execute(value.funcallValue(), paramContext);
     if (!value.equals(Funcall.s_false)) {
       value = Funcall.s_false;
       for (byte b1 = 3; b1 < paramValueVector.size(); b1++) {
@@ -21,8 +20,7 @@ class _if implements Userfunction {
             break;
           }
         } else {
-          if (value1.equals(Funcall.s_else))
-            break;
+          if (value1.equals(Funcall.s_else)) break;
           value = value1;
           break;
         }

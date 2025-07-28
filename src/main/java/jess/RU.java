@@ -81,8 +81,7 @@ public class RU {
     boolean bool = true;
     while (bool) {
       str = s_atoms.get(i);
-      if (str != null && str.equals(paramString))
-        return i;
+      if (str != null && str.equals(paramString)) return i;
       if (str == null) {
         s_atoms.put(i, paramString);
         return i;
@@ -97,8 +96,9 @@ public class RU {
   }
 
   public static synchronized int gensym(String paramString) {
-    for (String str = paramString + s_gensymIdx; getAtom(str.hashCode()) != null; str = paramString + s_gensymIdx)
-      s_gensymIdx++;
+    for (String str = paramString + s_gensymIdx;
+        getAtom(str.hashCode()) != null;
+        str = paramString + s_gensymIdx) s_gensymIdx++;
     return putAtom(str);
   }
 }

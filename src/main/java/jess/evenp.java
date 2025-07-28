@@ -8,7 +8,7 @@ class evenp implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    boolean bool = ((int)paramValueVector.get(1).numericValue() % 2 == 0) ? true : false;
+    boolean bool = ((int) paramValueVector.get(1).numericValue() % 2 == 0) ? true : false;
     return bool ? Funcall.TRUE() : Funcall.FALSE();
   }
 }

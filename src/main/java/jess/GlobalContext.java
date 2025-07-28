@@ -12,8 +12,7 @@ class GlobalContext extends Context {
   Binding findGlobalBinding(int paramInt) {
     for (byte b = 0; b < this.m_globalBindings.size(); b++) {
       Binding binding = this.m_globalBindings.elementAt(b);
-      if (binding.m_name == paramInt)
-        return binding;
+      if (binding.m_name == paramInt) return binding;
     }
     return null;
   }

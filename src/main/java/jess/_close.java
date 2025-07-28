@@ -20,14 +20,16 @@ class _close implements Userfunction {
             outputStream.close();
             rete.removeOutputRouter(str);
           }
-        } catch (IOException iOException) {}
+        } catch (IOException iOException) {
+        }
         try {
           InputStream inputStream;
           if ((inputStream = rete.getInputRouter(str)) != null) {
             inputStream.close();
             rete.removeInputRouter(str);
           }
-        } catch (IOException iOException) {}
+        } catch (IOException iOException) {
+        }
       }
     } else {
       throw new ReteException("_close::call", "Must close files by name", "");

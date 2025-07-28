@@ -31,8 +31,7 @@ public class Funcall extends ValueVector {
     Userfunction userfunction = paramRete.findDeffunction(paramString);
     if (userfunction == null) {
       userfunction = paramRete.findUserfunction(paramString);
-      if (userfunction == null)
-        userfunction = (Userfunction)s_intrinsics.get(paramString);
+      if (userfunction == null) userfunction = (Userfunction) s_intrinsics.get(paramString);
     }
     this.m_funcall = userfunction;
   }
@@ -97,11 +96,14 @@ public class Funcall extends ValueVector {
     return execute(paramFuncall, paramContext, null, null);
   }
 
-  static final Value execute(Funcall paramFuncall, Context paramContext, EvalCache paramEvalCache) throws ReteException {
+  static final Value execute(Funcall paramFuncall, Context paramContext, EvalCache paramEvalCache)
+      throws ReteException {
     return execute(paramFuncall, paramContext, paramEvalCache, null);
   }
 
-  static Value execute(Funcall paramFuncall, Context paramContext, EvalCache paramEvalCache, Value paramValue) throws ReteException {
+  static Value execute(
+      Funcall paramFuncall, Context paramContext, EvalCache paramEvalCache, Value paramValue)
+      throws ReteException {
     boolean bool = (paramEvalCache != null) ? paramEvalCache.markValue() : false;
     int i = paramFuncall.size();
     int j = paramFuncall.get(0).atomValue();
@@ -114,8 +116,7 @@ public class Funcall extends ValueVector {
           boolean bool1 = (paramEvalCache != null) ? paramEvalCache.markValue() : false;
           Value value2 = execute(funcall, paramContext, paramEvalCache, value1);
           paramFuncall.set(value2, b);
-          if (paramEvalCache != null)
-            paramEvalCache.restoreValue(bool1);
+          if (paramEvalCache != null) paramEvalCache.restoreValue(bool1);
         } else if (k == 256 || k == 128) {
           ValueVector valueVector = paramFuncall.get(b).factValue();
           for (byte b1 = 3; b1 < valueVector.size(); b1++) {
@@ -125,8 +126,7 @@ public class Funcall extends ValueVector {
               boolean bool1 = (paramEvalCache != null) ? paramEvalCache.markValue() : false;
               Value value2 = execute(funcall, paramContext, paramEvalCache, value1);
               valueVector.set(value2, b1);
-              if (paramEvalCache != null)
-                paramEvalCache.restoreValue(bool1);
+              if (paramEvalCache != null) paramEvalCache.restoreValue(bool1);
             }
           }
         } else if (k == 512) {
@@ -138,24 +138,24 @@ public class Funcall extends ValueVector {
               Funcall funcall = valueVector.get(b1).funcallValue();
               Value value2 = execute(funcall, paramContext, paramEvalCache, value1);
               valueVector.set(value2, b1);
-              if (paramEvalCache != null)
-                paramEvalCache.restoreValue(bool1);
+              if (paramEvalCache != null) paramEvalCache.restoreValue(bool1);
             }
           }
           paramFuncall.set(new Value(Context.flattenList(valueVector), 512), b);
         }
       }
     Value value = simpleExecute(paramFuncall, paramContext, paramValue);
-    if (paramEvalCache != null)
-      paramEvalCache.restoreValue(bool);
+    if (paramEvalCache != null) paramEvalCache.restoreValue(bool);
     return value;
   }
 
-  public static Value simpleExecute(Funcall paramFuncall, Context paramContext) throws ReteException {
+  public static Value simpleExecute(Funcall paramFuncall, Context paramContext)
+      throws ReteException {
     return simpleExecute(paramFuncall, paramContext, null);
   }
 
-  static Value simpleExecute(Funcall paramFuncall, Context paramContext, Value paramValue) throws ReteException {
+  static Value simpleExecute(Funcall paramFuncall, Context paramContext, Value paramValue)
+      throws ReteException {
     Userfunction userfunction = paramFuncall.m_funcall;
     if (userfunction == null) {
       Rete rete = paramContext.m_engine;
@@ -163,13 +163,15 @@ public class Funcall extends ValueVector {
       userfunction = rete.findDeffunction(str);
       if (userfunction == null) {
         userfunction = rete.findUserfunction(str);
-        if (userfunction == null)
-          userfunction = (Userfunction)s_intrinsics.get(str);
+        if (userfunction == null) userfunction = (Userfunction) s_intrinsics.get(str);
       }
       if (userfunction == null)
-        throw new ReteException("Funcall::simpleExecute", "Unimplemented function", paramFuncall.get(0).stringValue());
+        throw new ReteException(
+            "Funcall::simpleExecute", "Unimplemented function", paramFuncall.get(0).stringValue());
     }
-    return (userfunction instanceof Fastfunction && paramValue != null) ? ((Fastfunction)userfunction).call(paramFuncall, paramContext, paramValue) : userfunction.call(paramFuncall, paramContext);
+    return (userfunction instanceof Fastfunction && paramValue != null)
+        ? ((Fastfunction) userfunction).call(paramFuncall, paramContext, paramValue)
+        : userfunction.call(paramFuncall, paramContext);
   }
 
   String ppFuncall(Rete paramRete) throws ReteException {
@@ -203,8 +205,7 @@ public class Funcall extends ValueVector {
       case 512:
         valueVector2 = get(paramInt).listValue();
         str = "";
-        for (b = 1; b < valueVector2.size(); b++)
-          str = str + ppArgument(b, paramRete) + " ";
+        for (b = 1; b < valueVector2.size(); b++) str = str + ppArgument(b, paramRete) + " ";
         return str;
       case 64:
         valueVector2 = get(paramInt).funcallValue();
@@ -231,23 +232,29 @@ public class Funcall extends ValueVector {
       System.exit(0);
     }
     String[] arrayOfString1 = {
-        "_return", "_assert", "_retract", "_retract_string", "_printout", "_extract_global", "_open", "_close", "_foreach", "_read",
-        "_readline", "_gensym_star", "_while", "_if", "_bind", "_modify", "_and", "_or", "_not", "_eq",
-        "_eqstar", "_equals", "_not_equals", "_gt", "_lt", "_gt_or_eq", "_lt_or_eq", "_neq", "_mod", "_plus",
-        "_times", "_minus", "_divide", "_sym_cat", "_reset", "_run", "_facts", "_rules", "_halt", "_exit",
-        "_clear", "_watch", "_unwatch", "_jess_version_string", "_jess_version_number", "_load_facts", "_save_facts", "_assert_string", "_undefrule" };
+      "_return", "_assert", "_retract", "_retract_string", "_printout", "_extract_global", "_open",
+          "_close", "_foreach", "_read",
+      "_readline", "_gensym_star", "_while", "_if", "_bind", "_modify", "_and", "_or", "_not",
+          "_eq",
+      "_eqstar", "_equals", "_not_equals", "_gt", "_lt", "_gt_or_eq", "_lt_or_eq", "_neq", "_mod",
+          "_plus",
+      "_times", "_minus", "_divide", "_sym_cat", "_reset", "_run", "_facts", "_rules", "_halt",
+          "_exit",
+      "_clear", "_watch", "_unwatch", "_jess_version_string", "_jess_version_number", "_load_facts",
+          "_save_facts", "_assert_string", "_undefrule"
+    };
     try {
       for (byte b1 = 0; b1 < arrayOfString1.length; b1++) {
-        Userfunction userfunction = (Userfunction)Class.forName("jess." + arrayOfString1[b1]).newInstance();
+        Userfunction userfunction =
+            (Userfunction) Class.forName("jess." + arrayOfString1[b1]).newInstance();
         s_intrinsics.put(RU.getAtom(userfunction.name()), userfunction);
       }
     } catch (Throwable throwable) {
       System.out.println("*** FATAL ***: Missing intrinsic function class");
       System.exit(0);
     }
-    String[] arrayOfString2 = { "if", "while", "and", "or", "foreach" };
+    String[] arrayOfString2 = {"if", "while", "and", "or", "foreach"};
     s_ctrl = new int[arrayOfString2.length];
-    for (byte b = 0; b < arrayOfString2.length; b++)
-      s_ctrl[b] = RU.putAtom(arrayOfString2[b]);
+    for (byte b = 0; b < arrayOfString2.length; b++) s_ctrl[b] = RU.putAtom(arrayOfString2[b]);
   }
 }

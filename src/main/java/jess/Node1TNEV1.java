@@ -1,13 +1,18 @@
 package jess;
 
 class Node1TNEV1 extends Node1 {
-  Node1TNEV1(int paramInt1, int paramInt2, int paramInt3, int paramInt4, Value paramValue, Rete paramRete) {
+  Node1TNEV1(
+      int paramInt1,
+      int paramInt2,
+      int paramInt3,
+      int paramInt4,
+      Value paramValue,
+      Rete paramRete) {
     super(4, paramInt1, paramInt2, paramInt3, paramInt4, paramValue, paramRete);
   }
 
   boolean callNode(Token paramToken, int paramInt) throws ReteException {
-    if (super.callNode(paramToken, paramInt))
-      return false;
+    if (super.callNode(paramToken, paramInt)) return false;
     boolean bool = false;
     ValueVector valueVector = paramToken.fact(0);
     if (valueVector.size() >= this.R1 && valueVector.size() >= this.R2) {
@@ -25,8 +30,7 @@ class Node1TNEV1 extends Node1 {
       }
       bool = !value1.equals(value2) ? true : false;
     }
-    if (bool)
-      passAlong(paramToken);
+    if (bool) passAlong(paramToken);
     return bool;
   }
 }

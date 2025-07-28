@@ -20,10 +20,8 @@ class _format implements Userfunction {
     char c = Character.MIN_VALUE;
     while (b1 < str1.length()) {
       Value value1;
-      while (b1 < str1.length() && (c = str1.charAt(b1++)) != '%')
-        stringBuffer2.append(c);
-      if (b1 >= str1.length())
-        break;
+      while (b1 < str1.length() && (c = str1.charAt(b1++)) != '%') stringBuffer2.append(c);
+      if (b1 >= str1.length()) break;
       stringBuffer1.setLength(0);
       stringBuffer1.append(c);
       while (b1 < str1.length() && (c = str1.charAt(b1++)) != '%' && !Character.isLetter(c))
@@ -63,7 +61,7 @@ class _format implements Userfunction {
               stringBuffer2.append(format.form(value1.stringValue().charAt(0)));
               continue;
           }
-          stringBuffer2.append(format.form((char)value1.intValue()));
+          stringBuffer2.append(format.form((char) value1.intValue()));
           continue;
         case 's':
           value1 = paramValueVector.get(b2++);
@@ -76,11 +74,9 @@ class _format implements Userfunction {
     if (!value.equals(Funcall.NIL())) {
       String str = value.stringValue();
       OutputStream outputStream = paramContext.engine().getOutputRouter(str);
-      if (outputStream == null)
-        throw new ReteException("_format::call", "Bad router", str);
+      if (outputStream == null) throw new ReteException("_format::call", "Bad router", str);
       try {
-        for (byte b = 0; b < str2.length(); b++)
-          outputStream.write(str2.charAt(b));
+        for (byte b = 0; b < str2.length(); b++) outputStream.write(str2.charAt(b));
         outputStream.flush();
       } catch (IOException iOException) {
         throw new ReteException("_format::call", "I/O Exception", iOException.toString());

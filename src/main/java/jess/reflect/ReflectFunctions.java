@@ -27,7 +27,8 @@ public class ReflectFunctions implements Userpackage {
     paramRete.addUserfunction(new undefinstance(definstance));
   }
 
-  static Object valueToObject(Class paramClass, Value paramValue) throws IllegalArgumentException, ReteException {
+  static Object valueToObject(Class paramClass, Value paramValue)
+      throws IllegalArgumentException, ReteException {
     String str;
     int i;
     double d;
@@ -39,42 +40,31 @@ public class ReflectFunctions implements Userpackage {
       case 1:
       case 2:
         str = paramValue.stringValue();
-        if (paramClass == String.class)
-          return str;
+        if (paramClass == String.class) return str;
         if (paramClass == char.class) {
-          if (str.length() == 1)
-            return new Character(str.charAt(0));
+          if (str.length() == 1) return new Character(str.charAt(0));
           throw new IllegalArgumentException();
         }
         if (paramClass == boolean.class) {
-          if (str.equals("TRUE"))
-            return Boolean.TRUE;
-          if (str.equals("FALSE"))
-            return Boolean.FALSE;
+          if (str.equals("TRUE")) return Boolean.TRUE;
+          if (str.equals("FALSE")) return Boolean.FALSE;
           throw new IllegalArgumentException();
         }
-        if (!paramClass.isPrimitive() && str.equals("NIL"))
-          return null;
+        if (!paramClass.isPrimitive() && str.equals("NIL")) return null;
         throw new IllegalArgumentException();
       case 4:
         i = paramValue.intValue();
-        if (paramClass == long.class || paramClass == Long.class)
-          return new Long(i);
-        if (paramClass == int.class || paramClass == Integer.class)
-          return new Integer(i);
-        if (paramClass == short.class || paramClass == Short.class)
-          return new Short((short)i);
+        if (paramClass == long.class || paramClass == Long.class) return new Long(i);
+        if (paramClass == int.class || paramClass == Integer.class) return new Integer(i);
+        if (paramClass == short.class || paramClass == Short.class) return new Short((short) i);
         if (paramClass == char.class || paramClass == Character.class)
-          return new Character((char)i);
-        if (paramClass == byte.class || paramClass == Byte.class)
-          return new Byte((byte)i);
+          return new Character((char) i);
+        if (paramClass == byte.class || paramClass == Byte.class) return new Byte((byte) i);
         throw new IllegalArgumentException();
       case 32:
         d = paramValue.floatValue();
-        if (paramClass == double.class || paramClass == Double.class)
-          return new Double(d);
-        if (paramClass == float.class || paramClass == Float.class)
-          return new Float((float)d);
+        if (paramClass == double.class || paramClass == Double.class) return new Double(d);
+        if (paramClass == float.class || paramClass == Float.class) return new Float((float) d);
         throw new IllegalArgumentException();
       case 512:
         if (paramClass.isArray()) {
@@ -91,12 +81,9 @@ public class ReflectFunctions implements Userpackage {
   }
 
   static Value objectToValue(Class paramClass, Object paramObject) throws ReteException {
-    if (paramObject == null)
-      return Funcall.NIL();
-    if (paramClass == Void.class)
-      return Funcall.NIL();
-    if (paramClass == String.class)
-      return new Value(paramObject.toString(), 2);
+    if (paramObject == null) return Funcall.NIL();
+    if (paramClass == Void.class) return Funcall.NIL();
+    if (paramClass == String.class) return new Value(paramObject.toString(), 2);
     if (paramClass.isArray()) {
       int i = Array.getLength(paramObject);
       ValueVector valueVector = new ValueVector(i);
@@ -104,6 +91,17 @@ public class ReflectFunctions implements Userpackage {
         valueVector.add(objectToValue(paramClass.getComponentType(), Array.get(paramObject, b)));
       return new Value(valueVector, 512);
     }
-    return (paramClass == boolean.class) ? (((Boolean)paramObject).booleanValue() ? Funcall.TRUE() : Funcall.FALSE()) : ((paramClass == byte.class || paramClass == short.class || paramClass == int.class || paramClass == long.class) ? new Value(((Number)paramObject).intValue(), 4) : ((paramClass == double.class || paramClass == float.class) ? new Value(((Number)paramObject).doubleValue(), 32) : ((paramClass == char.class) ? new Value(paramObject.toString(), 1) : new Value(paramObject, 2048))));
+    return (paramClass == boolean.class)
+        ? (((Boolean) paramObject).booleanValue() ? Funcall.TRUE() : Funcall.FALSE())
+        : ((paramClass == byte.class
+                || paramClass == short.class
+                || paramClass == int.class
+                || paramClass == long.class)
+            ? new Value(((Number) paramObject).intValue(), 4)
+            : ((paramClass == double.class || paramClass == float.class)
+                ? new Value(((Number) paramObject).doubleValue(), 32)
+                : ((paramClass == char.class)
+                    ? new Value(paramObject.toString(), 1)
+                    : new Value(paramObject, 2048))));
   }
 }

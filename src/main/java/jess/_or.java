@@ -13,8 +13,7 @@ class _or implements Userfunction {
           value = Funcall.execute(paramContext.expandAction(value.funcallValue()), paramContext);
           break;
       }
-      if (!value.equals(Funcall.s_false))
-        return Funcall.s_true;
+      if (!value.equals(Funcall.s_false)) return Funcall.s_true;
     }
     return Funcall.s_false;
   }

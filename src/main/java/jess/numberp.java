@@ -8,6 +8,8 @@ class numberp implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    return (paramValueVector.get(1).type() == 4 || paramValueVector.get(1).type() == 32) ? Funcall.TRUE() : Funcall.FALSE();
+    return (paramValueVector.get(1).type() == 4 || paramValueVector.get(1).type() == 32)
+        ? Funcall.TRUE()
+        : Funcall.FALSE();
   }
 }

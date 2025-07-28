@@ -8,6 +8,6 @@ class random implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    return new Value((int)(Math.random() * 65536.0D), 4);
+    return new Value((int) (Math.random() * 65536.0D), 4);
   }
 }

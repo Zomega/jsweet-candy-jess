@@ -22,7 +22,10 @@ class _save_facts implements Userfunction {
       }
     } else {
       try {
-        URL uRL = new URL(paramContext.engine().display().applet().getDocumentBase(), paramValueVector.get(1).stringValue());
+        URL uRL =
+            new URL(
+                paramContext.engine().display().applet().getDocumentBase(),
+                paramValueVector.get(1).stringValue());
         URLConnection uRLConnection = uRL.openConnection();
         uRLConnection.setDoOutput(true);
         printStream = new PrintStream(uRLConnection.getOutputStream());

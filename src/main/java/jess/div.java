@@ -8,8 +8,8 @@ class div implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    int i = (int)paramValueVector.get(1).numericValue();
-    int j = (int)paramValueVector.get(2).numericValue();
+    int i = (int) paramValueVector.get(1).numericValue();
+    int j = (int) paramValueVector.get(2).numericValue();
     return new Value(i / j, 4);
   }
 }

@@ -10,20 +10,17 @@ class TokenTree {
       return;
     }
     Token token = tokenHolder.m_token;
-    if (token.dataEquals(paramToken))
-      return;
+    if (token.dataEquals(paramToken)) return;
     while (token.m_next != null) {
       token = token.m_next;
-      if (token.dataEquals(paramToken))
-        return;
+      if (token.dataEquals(paramToken)) return;
     }
     token.m_next = paramToken;
   }
 
   synchronized void remove(Token paramToken) {
     TokenHolder tokenHolder = findCodeInTree(paramToken, false);
-    if (tokenHolder == null || tokenHolder.m_token == null)
-      return;
+    if (tokenHolder == null || tokenHolder.m_token == null) return;
     Token token = tokenHolder.m_token;
     if (token.dataEquals(paramToken)) {
       tokenHolder.m_token = token.m_next;

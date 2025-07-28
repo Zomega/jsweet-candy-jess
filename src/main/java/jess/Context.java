@@ -51,7 +51,7 @@ public class Context {
     contextState.m_retval = this.m_retval;
     contextState.m_bindings = new Vector();
     for (byte b = 0; b < this.m_bindings.size(); b++)
-      contextState.m_bindings.addElement(((Binding)this.m_bindings.elementAt(b)).clone());
+      contextState.m_bindings.addElement(((Binding) this.m_bindings.elementAt(b)).clone());
     this.m_states.push(contextState);
   }
 
@@ -61,14 +61,14 @@ public class Context {
       this.m_return = contextState.m_return;
       this.m_retval = contextState.m_retval;
       this.m_bindings = contextState.m_bindings;
-    } catch (EmptyStackException emptyStackException) {}
+    } catch (EmptyStackException emptyStackException) {
+    }
   }
 
   Binding findBinding(int paramInt) {
     for (byte b = 0; b < this.m_bindings.size(); b++) {
       Binding binding = this.m_bindings.elementAt(b);
-      if (binding.m_name == paramInt)
-        return binding;
+      if (binding.m_name == paramInt) return binding;
     }
     return this.m_engine.globalContext().findGlobalBinding(paramInt);
   }
@@ -85,26 +85,27 @@ public class Context {
 
   final Binding setVariable(int paramInt, Value paramValue) {
     Binding binding = findBinding(paramInt);
-    if (binding == null)
-      binding = addBinding(paramInt, -2, -2, -1);
+    if (binding == null) binding = addBinding(paramInt, -2, -2, -1);
     binding.m_val = paramValue;
     return binding;
   }
 
   Funcall expandAction(Funcall paramFuncall) throws ReteException {
     boolean bool = false;
-    Funcall funcall = (Funcall)paramFuncall.clone();
+    Funcall funcall = (Funcall) paramFuncall.clone();
     String str = funcall.get(0).stringValue();
     for (byte b = 1; b < funcall.size(); b++) {
       Value value = funcall.get(b);
       if ((str.equals("bind") || str.equals("foreach")) && b == 1) {
         Binding binding = findBinding(value.variableValue());
-        if (binding == null)
-          binding = setVariable(value.variableValue(), null);
+        if (binding == null) binding = setVariable(value.variableValue(), null);
         bool = true;
       } else {
-        if ((str.equals("if") && b > 1) || str.equals("while") || str.equals("and") || str.equals("or") || (str.equals("foreach") && b > 2))
-          break;
+        if ((str.equals("if") && b > 1)
+            || str.equals("while")
+            || str.equals("and")
+            || str.equals("or")
+            || (str.equals("foreach") && b > 2)) break;
         funcall.set(expandValue(value), b);
       }
     }
@@ -141,7 +142,7 @@ public class Context {
   }
 
   public ValueVector expandFact(ValueVector paramValueVector) throws ReteException {
-    ValueVector valueVector = (ValueVector)paramValueVector.clone();
+    ValueVector valueVector = (ValueVector) paramValueVector.clone();
     for (byte b = 3; b < valueVector.size(); b++) {
       Binding binding;
       Funcall funcall;
@@ -170,7 +171,7 @@ public class Context {
   }
 
   ValueVector expandList(ValueVector paramValueVector) throws ReteException {
-    ValueVector valueVector = (ValueVector)paramValueVector.clone();
+    ValueVector valueVector = (ValueVector) paramValueVector.clone();
     for (byte b = 0; b < valueVector.size(); b++) {
       Binding binding;
       Funcall funcall;
@@ -202,7 +203,8 @@ public class Context {
     return valueVector;
   }
 
-  private static void doFlattenList(ValueVector paramValueVector1, ValueVector paramValueVector2) throws ReteException {
+  private static void doFlattenList(ValueVector paramValueVector1, ValueVector paramValueVector2)
+      throws ReteException {
     for (byte b = 0; b < paramValueVector2.size(); b++) {
       Value value = paramValueVector2.get(b);
       if (value.type() != 512) {

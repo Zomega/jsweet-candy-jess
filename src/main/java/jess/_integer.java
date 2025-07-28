@@ -8,6 +8,6 @@ class _integer implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    return new Value((int)paramValueVector.get(1).numericValue(), 4);
+    return new Value((int) paramValueVector.get(1).numericValue(), 4);
   }
 }

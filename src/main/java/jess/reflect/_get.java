@@ -18,10 +18,13 @@ class _get extends _call {
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     try {
       String str = paramValueVector.get(2).stringValue();
-      PropertyDescriptor[] arrayOfPropertyDescriptor = Introspector.getBeanInfo(paramValueVector.get(1).externalAddressValue().getClass()).getPropertyDescriptors();
+      PropertyDescriptor[] arrayOfPropertyDescriptor =
+          Introspector.getBeanInfo(paramValueVector.get(1).externalAddressValue().getClass())
+              .getPropertyDescriptors();
       for (byte b = 0; b < arrayOfPropertyDescriptor.length; b++) {
         Method method = null;
-        if (arrayOfPropertyDescriptor[b].getName().equals(str) && (method = arrayOfPropertyDescriptor[b].getReadMethod()) != null) {
+        if (arrayOfPropertyDescriptor[b].getName().equals(str)
+            && (method = arrayOfPropertyDescriptor[b].getReadMethod()) != null) {
           paramValueVector.set(new Value(method.getName(), 2), 2);
           return super.call(paramValueVector, paramContext);
         }

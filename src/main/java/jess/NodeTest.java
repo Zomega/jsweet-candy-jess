@@ -13,8 +13,7 @@ public class NodeTest extends Node {
 
   void complete() {
     this.m_localTests = new Object[this.m_tests.size()];
-    for (byte b = 0; b < this.m_tests.size(); b++)
-      this.m_localTests[b] = this.m_tests.elementAt(b);
+    for (byte b = 0; b < this.m_tests.size(); b++) this.m_localTests[b] = this.m_tests.elementAt(b);
   }
 
   void addTest(int paramInt1, int paramInt2, Value paramValue) {
@@ -29,24 +28,24 @@ public class NodeTest extends Node {
     throw new ReteException("NodeTest:addtest", "Can't add Test2s to this class", "");
   }
 
-  void addTest(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6) throws ReteException {
+  void addTest(
+      int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+      throws ReteException {
     throw new ReteException("NodeTest:addtest", "Can't add Test2s to this class", "");
   }
 
   boolean equals(NodeTest paramNodeTest) {
-    if (this == paramNodeTest)
-      return true;
-    if (getClass() != paramNodeTest.getClass() || this instanceof NodeNot2 || paramNodeTest instanceof NodeNot2 || paramNodeTest.m_tests.size() != this.m_tests.size())
-      return false;
+    if (this == paramNodeTest) return true;
+    if (getClass() != paramNodeTest.getClass()
+        || this instanceof NodeNot2
+        || paramNodeTest instanceof NodeNot2
+        || paramNodeTest.m_tests.size() != this.m_tests.size()) return false;
     for (byte b = 0; b < this.m_tests.size(); b++) {
-      if (this.m_tests.elementAt(b) instanceof Test1)
-        return false;
+      if (this.m_tests.elementAt(b) instanceof Test1) return false;
       Test2 test2 = this.m_tests.elementAt(b);
-      for (byte b1 = 0;; b1++) {
-        if (b1 >= this.m_tests.size())
-          return false;
-        if (test2.equals(paramNodeTest.m_tests.elementAt(b1)))
-          break;
+      for (byte b1 = 0; ; b1++) {
+        if (b1 >= this.m_tests.size()) return false;
+        if (test2.equals(paramNodeTest.m_tests.elementAt(b1))) break;
       }
     }
     return true;
@@ -71,9 +70,10 @@ public class NodeTest extends Node {
       int j;
       int k;
       try {
-        test1 = (Test1)this.m_localTests[b];
+        test1 = (Test1) this.m_localTests[b];
       } catch (ClassCastException classCastException) {
-        throw new ReteException("NodeTest:callNode", "Bad test type!", this.m_localTests[b].getClass().getName());
+        throw new ReteException(
+            "NodeTest:callNode", "Bad test type!", this.m_localTests[b].getClass().getName());
       }
       Value value = test1.m_slotValue;
       switch (test1.m_test) {
@@ -83,8 +83,9 @@ public class NodeTest extends Node {
           try {
             j = this.m_cache.markFuncall();
             k = this.m_cache.markValue();
-            if (Funcall.execute(eval(value, paramToken), this.m_engine.globalContext(), this.m_cache).equals(Funcall.FALSE()))
-              return false;
+            if (Funcall.execute(
+                    eval(value, paramToken), this.m_engine.globalContext(), this.m_cache)
+                .equals(Funcall.FALSE())) return false;
           } finally {
             this.m_cache.restoreFuncall(j);
             this.m_cache.restoreValue(k);
@@ -96,15 +97,17 @@ public class NodeTest extends Node {
           try {
             j = this.m_cache.markFuncall();
             k = this.m_cache.markValue();
-            if (!Funcall.execute(eval(value, paramToken), this.m_engine.globalContext(), this.m_cache).equals(Funcall.FALSE()))
-              return false;
+            if (!Funcall.execute(
+                    eval(value, paramToken), this.m_engine.globalContext(), this.m_cache)
+                .equals(Funcall.FALSE())) return false;
           } finally {
             this.m_cache.restoreFuncall(j);
             this.m_cache.restoreValue(k);
           }
           break;
         default:
-          throw new ReteException("NodeTest::runTests", "Test type not supported", String.valueOf(test1.m_test));
+          throw new ReteException(
+              "NodeTest::runTests", "Test type not supported", String.valueOf(test1.m_test));
       }
     }
     return true;

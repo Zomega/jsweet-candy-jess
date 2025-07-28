@@ -16,6 +16,7 @@ class pi implements Userfunction {
   static {
     try {
       s_pi = new Value(Math.PI, 32);
-    } catch (ReteException reteException) {}
+    } catch (ReteException reteException) {
+    }
   }
 }

@@ -21,16 +21,15 @@ public class TextAreaOutputStream extends OutputStream {
   }
 
   public void write(int paramInt) throws IOException {
-    this.m_str.append((char)paramInt);
+    this.m_str.append((char) paramInt);
   }
 
   public void write(byte[] paramArrayOfbyte) throws IOException {
     for (byte b = 0; b < paramArrayOfbyte.length; b++)
-      this.m_str.append((char)paramArrayOfbyte[b]);
+      this.m_str.append((char) paramArrayOfbyte[b]);
   }
 
   public void write(byte[] paramArrayOfbyte, int paramInt1, int paramInt2) throws IOException {
-    for (int i = paramInt1; i < paramInt2; i++)
-      this.m_str.append((char)paramArrayOfbyte[i]);
+    for (int i = paramInt1; i < paramInt2; i++) this.m_str.append((char) paramArrayOfbyte[i]);
   }
 }

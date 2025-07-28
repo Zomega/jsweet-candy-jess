@@ -18,12 +18,10 @@ class _system implements Userfunction {
         i--;
       }
       String[] arrayOfString = new String[i - 1];
-      for (byte b = 1; b < i; b++)
-        arrayOfString[b - 1] = paramValueVector.get(b).stringValue();
+      for (byte b = 1; b < i; b++) arrayOfString[b - 1] = paramValueVector.get(b).stringValue();
       Process process = Runtime.getRuntime().exec(arrayOfString);
       try {
-        if (!bool)
-          process.waitFor();
+        if (!bool) process.waitFor();
       } catch (InterruptedException interruptedException) {
         return Funcall.FALSE();
       }

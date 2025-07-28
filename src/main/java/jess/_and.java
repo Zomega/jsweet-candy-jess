@@ -13,8 +13,7 @@ class _and implements Userfunction {
           value = Funcall.execute(paramContext.expandAction(value.funcallValue()), paramContext);
           break;
       }
-      if (value.equals(Funcall.s_false))
-        return Funcall.s_false;
+      if (value.equals(Funcall.s_false)) return Funcall.s_false;
     }
     return Funcall.s_true;
   }

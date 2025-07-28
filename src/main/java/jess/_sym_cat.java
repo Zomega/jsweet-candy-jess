@@ -5,7 +5,8 @@ class _sym_cat extends Fastfunction {
     return RU.putAtom("sym-cat");
   }
 
-  public Value call(ValueVector paramValueVector, Context paramContext, Value paramValue) throws ReteException {
+  public Value call(ValueVector paramValueVector, Context paramContext, Value paramValue)
+      throws ReteException {
     StringBuffer stringBuffer = new StringBuffer("");
     for (byte b = 1; b < paramValueVector.size(); b++) {
       Value value = paramValueVector.get(b);

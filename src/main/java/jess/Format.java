@@ -101,14 +101,12 @@ public class Format {
       }
       b2++;
     }
-    if (b2 < i)
-      this.post = paramString.substring(b2, i);
+    if (b2 < i) this.post = paramString.substring(b2, i);
   }
 
   public String form(double paramDouble) {
     String str;
-    if (this.precision < 0)
-      this.precision = 6;
+    if (this.precision < 0) this.precision = 6;
     byte b = 1;
     if (paramDouble < 0.0D) {
       paramDouble = -paramDouble;
@@ -147,35 +145,29 @@ public class Format {
   }
 
   public String form(char paramChar) {
-    if (this.fmt != 'c')
-      throw new IllegalArgumentException();
+    if (this.fmt != 'c') throw new IllegalArgumentException();
     String str = "" + paramChar;
     return pad(str);
   }
 
   public String form(String paramString) {
-    if (this.fmt != 's')
-      throw new IllegalArgumentException();
-    if (this.precision >= 0)
-      paramString = paramString.substring(0, this.precision);
+    if (this.fmt != 's') throw new IllegalArgumentException();
+    if (this.precision >= 0) paramString = paramString.substring(0, this.precision);
     return pad(paramString);
   }
 
   private static String repeat(char paramChar, int paramInt) {
-    if (paramInt <= 0)
-      return "";
+    if (paramInt <= 0) return "";
     StringBuffer stringBuffer = new StringBuffer(paramInt);
-    for (byte b = 0; b < paramInt; b++)
-      stringBuffer.append(paramChar);
+    for (byte b = 0; b < paramInt; b++) stringBuffer.append(paramChar);
     return stringBuffer.toString();
   }
 
   private static String convert(long paramLong, int paramInt1, int paramInt2, String paramString) {
-    if (paramLong == 0L)
-      return "0";
+    if (paramLong == 0L) return "0";
     String str = "";
     while (paramLong != 0L) {
-      str = paramString.charAt((int)(paramLong & paramInt2)) + str;
+      str = paramString.charAt((int) (paramLong & paramInt2)) + str;
       paramLong >>>= paramInt1;
     }
     return str;
@@ -183,7 +175,9 @@ public class Format {
 
   private String pad(String paramString) {
     String str = repeat(' ', this.width - paramString.length());
-    return this.left_align ? (this.pre + paramString + str + this.post) : (this.pre + str + paramString + this.post);
+    return this.left_align
+        ? (this.pre + paramString + str + this.post)
+        : (this.pre + str + paramString + this.post);
   }
 
   private String sign(int paramInt, String paramString) {
@@ -196,7 +190,10 @@ public class Format {
       } else if (this.show_space) {
         str = " ";
       }
-    } else if (this.fmt == 'o' && this.alternate && paramString.length() > 0 && paramString.charAt(0) != '0') {
+    } else if (this.fmt == 'o'
+        && this.alternate
+        && paramString.length() > 0
+        && paramString.charAt(0) != '0') {
       str = "0";
     } else if (this.fmt == 'x' && this.alternate) {
       str = "0x";
@@ -206,7 +203,12 @@ public class Format {
     int i = 0;
     if (this.leading_zeroes) {
       i = this.width;
-    } else if ((this.fmt == 'd' || this.fmt == 'i' || this.fmt == 'x' || this.fmt == 'X' || this.fmt == 'o') && this.precision > 0) {
+    } else if ((this.fmt == 'd'
+            || this.fmt == 'i'
+            || this.fmt == 'x'
+            || this.fmt == 'X'
+            || this.fmt == 'o')
+        && this.precision > 0) {
       i = this.precision;
     }
     return str + repeat('0', i - str.length() - paramString.length()) + paramString;
@@ -214,9 +216,8 @@ public class Format {
 
   private String fixed_format(double paramDouble) {
     String str = "";
-    if (paramDouble > 9.223372036854776E18D)
-      return exp_format(paramDouble);
-    long l = (long)((this.precision == 0) ? (paramDouble + 0.5D) : paramDouble);
+    if (paramDouble > 9.223372036854776E18D) return exp_format(paramDouble);
+    long l = (long) ((this.precision == 0) ? (paramDouble + 0.5D) : paramDouble);
     str = str + l;
     double d = paramDouble - l;
     return (d >= 1.0D || d < 0.0D) ? exp_format(paramDouble) : (str + frac_part(d));
@@ -231,17 +232,16 @@ public class Format {
         d *= 10.0D;
         str1 = str1 + "0";
       }
-      long l = (long)(d * paramDouble + 0.5D);
+      long l = (long) (d * paramDouble + 0.5D);
       str = str1 + l;
       str = str.substring(str.length() - this.precision, str.length());
     }
-    if (this.precision > 0 || this.alternate)
-      str = "." + str;
+    if (this.precision > 0 || this.alternate) str = "." + str;
     if ((this.fmt == 'G' || this.fmt == 'g') && !this.alternate) {
       int i;
-      for (i = str.length() - 1; i >= 0 && str.charAt(i) == '0'; i--);
-      if (i >= 0 && str.charAt(i) == '.')
-        i--;
+      for (i = str.length() - 1; i >= 0 && str.charAt(i) == '0'; i--)
+        ;
+      if (i >= 0 && str.charAt(i) == '.') i--;
       str = str.substring(0, i + 1);
     }
     return str;

@@ -13,9 +13,11 @@ public class Node2 extends NodeTest {
     this.m_tests.addElement(new Test2(paramInt1, paramInt2, paramInt3, -1, paramInt4, -1));
   }
 
-  void addTest(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6) {
+  void addTest(
+      int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6) {
     Test2 test2;
-    this.m_tests.addElement(test2 = new Test2(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, paramInt6));
+    this.m_tests.addElement(
+        test2 = new Test2(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, paramInt6));
   }
 
   boolean callNode(Token paramToken, int paramInt) throws ReteException {
@@ -38,7 +40,8 @@ public class Node2 extends NodeTest {
             runTestsVaryRight(paramToken, this.m_right.m_root);
             return true;
         }
-        throw new ReteException("Node2::callNode", "Bad tag in token", String.valueOf(paramToken.m_tag));
+        throw new ReteException(
+            "Node2::callNode", "Bad tag in token", String.valueOf(paramToken.m_tag));
       case 1:
         switch (paramToken.m_tag) {
           case 0:
@@ -51,18 +54,26 @@ public class Node2 extends NodeTest {
             runTestsVaryLeft(paramToken, this.m_left.m_root);
             return true;
         }
-        throw new ReteException("Node2::callNode", "Bad tag in token", String.valueOf(paramToken.m_tag));
+        throw new ReteException(
+            "Node2::callNode", "Bad tag in token", String.valueOf(paramToken.m_tag));
     }
     throw new ReteException("Node2::callNode", "Bad callType", String.valueOf(paramInt));
   }
 
   void debugPrint(Token paramToken, int paramInt) throws ReteException {
-    System.out.println("TEST " + toString() + ";calltype=" + paramInt + ";tag=" + paramToken.m_tag + ";class=" + paramToken.fact(0).get(0).stringValue());
+    System.out.println(
+        "TEST "
+            + toString()
+            + ";calltype="
+            + paramInt
+            + ";tag="
+            + paramToken.m_tag
+            + ";class="
+            + paramToken.fact(0).get(0).stringValue());
   }
 
   void runTestsVaryRight(Token paramToken, TokenHolder paramTokenHolder) throws ReteException {
-    if (paramTokenHolder == null)
-      return;
+    if (paramTokenHolder == null) return;
     TokenHolder tokenHolder1;
     if ((tokenHolder1 = paramTokenHolder.m_left) != null)
       runTestsVaryRight(paramToken, tokenHolder1);
@@ -71,18 +82,14 @@ public class Node2 extends NodeTest {
       runTestsVaryRight(paramToken, tokenHolder2);
     for (Token token = paramTokenHolder.m_token; token != null; token = token.m_next) {
       Token token1 = new Token(paramToken, token.fact(0));
-      if (runTests(paramToken, token, token1))
-        passAlong(token1);
+      if (runTests(paramToken, token, token1)) passAlong(token1);
     }
   }
 
   void runTestsVaryLeft(Token paramToken, TokenHolder paramTokenHolder) throws ReteException {
-    if (paramTokenHolder == null)
-      return;
-    if (paramTokenHolder.m_left != null)
-      runTestsVaryLeft(paramToken, paramTokenHolder.m_left);
-    if (paramTokenHolder.m_right != null)
-      runTestsVaryLeft(paramToken, paramTokenHolder.m_right);
+    if (paramTokenHolder == null) return;
+    if (paramTokenHolder.m_left != null) runTestsVaryLeft(paramToken, paramTokenHolder.m_left);
+    if (paramTokenHolder.m_right != null) runTestsVaryLeft(paramToken, paramTokenHolder.m_right);
     for (Token token = paramTokenHolder.m_token; token != null; token = token.m_next) {
       Token token1 = new Token(token, paramToken.fact(0));
       if (runTests(token, paramToken, token1)) {
@@ -99,7 +106,7 @@ public class Node2 extends NodeTest {
     for (byte b = 0; b < i; b++) {
       Object object = this.m_localTests[b];
       if (object instanceof Test2) {
-        Test2 test2 = (Test2)object;
+        Test2 test2 = (Test2) object;
         ValueVector valueVector1 = paramToken1.fact(test2.m_tokenIdx);
         if (valueVector1 != null) {
           Value value1;
@@ -119,19 +126,18 @@ public class Node2 extends NodeTest {
           boolean bool = value1.equals(value2);
           int m = test2.m_test;
           if (m == 0) {
-            if (!bool)
-              return false;
+            if (!bool) return false;
           } else if (m == 1) {
-            if (bool)
-              return false;
+            if (bool) return false;
           } else {
-            throw new ReteException("Node2::runTests", "Test2 type not supported", String.valueOf(test2.m_test));
+            throw new ReteException(
+                "Node2::runTests", "Test2 type not supported", String.valueOf(test2.m_test));
           }
         }
       } else {
         int j;
         int k;
-        Test1 test1 = (Test1)object;
+        Test1 test1 = (Test1) object;
         Value value = test1.m_slotValue;
         switch (test1.m_test) {
           case 0:
@@ -140,8 +146,9 @@ public class Node2 extends NodeTest {
             try {
               j = evalCache.markFuncall();
               k = evalCache.markValue();
-              if (Funcall.execute(eval(value, paramToken3), this.m_engine.globalContext(), this.m_cache).equals(Funcall.FALSE()))
-                return false;
+              if (Funcall.execute(
+                      eval(value, paramToken3), this.m_engine.globalContext(), this.m_cache)
+                  .equals(Funcall.FALSE())) return false;
             } finally {
               evalCache.restoreFuncall(j);
               evalCache.restoreValue(k);
@@ -153,15 +160,17 @@ public class Node2 extends NodeTest {
             try {
               j = evalCache.markFuncall();
               k = evalCache.markValue();
-              if (!Funcall.execute(eval(value, paramToken3), this.m_engine.globalContext(), this.m_cache).equals(Funcall.FALSE()))
-                return false;
+              if (!Funcall.execute(
+                      eval(value, paramToken3), this.m_engine.globalContext(), this.m_cache)
+                  .equals(Funcall.FALSE())) return false;
             } finally {
               evalCache.restoreFuncall(j);
               evalCache.restoreValue(k);
             }
             break;
           default:
-            throw new ReteException("Node2::runTests", "Test1 type not supported", String.valueOf(test1.m_test));
+            throw new ReteException(
+                "Node2::runTests", "Test1 type not supported", String.valueOf(test1.m_test));
         }
       }
     }
@@ -199,8 +208,7 @@ public class Node2 extends NodeTest {
   }
 
   private int showMemory(TokenHolder paramTokenHolder, StringBuffer paramStringBuffer) {
-    if (paramTokenHolder == null)
-      return 0;
+    if (paramTokenHolder == null) return 0;
     int i = 0;
     i += showMemory(paramTokenHolder.m_left, paramStringBuffer);
     if (paramTokenHolder.m_token != null)

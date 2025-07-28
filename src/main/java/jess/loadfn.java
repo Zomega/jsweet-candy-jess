@@ -10,7 +10,7 @@ class loadfn implements Userfunction {
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     String str = paramValueVector.get(1).stringValue();
     try {
-      Userfunction userfunction = (Userfunction)Class.forName(str).newInstance();
+      Userfunction userfunction = (Userfunction) Class.forName(str).newInstance();
       paramContext.engine().addUserfunction(userfunction);
     } catch (ClassNotFoundException classNotFoundException) {
       throw new ReteException("load-function", "Class not found", str);

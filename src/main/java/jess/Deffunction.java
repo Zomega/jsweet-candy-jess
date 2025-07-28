@@ -34,14 +34,14 @@ public class Deffunction extends Context implements Userfunction {
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     Value value = null;
     if (paramValueVector.size() < this.m_nargs + 1)
-      throw new ReteException("Deffunction::Fire", "Too few arguments to Deffunction", RU.getAtom(this.m_name));
+      throw new ReteException(
+          "Deffunction::Fire", "Too few arguments to Deffunction", RU.getAtom(this.m_name));
     push();
     clearReturnValue();
     int i = this.m_bindings.size();
     for (byte b1 = 0; b1 < i; b1++) {
       Binding binding = this.m_bindings.elementAt(b1);
-      if (binding.m_slotIndex != -2)
-        binding.m_val = paramValueVector.get(binding.m_factIndex);
+      if (binding.m_slotIndex != -2) binding.m_val = paramValueVector.get(binding.m_factIndex);
     }
     i = this.m_actions.size();
     for (byte b2 = 0; b2 < i; b2++) {
@@ -68,8 +68,7 @@ public class Deffunction extends Context implements Userfunction {
     for (byte b = 0; b < paramVector.size(); b++) {
       ValueVector valueVector = paramVector.elementAt(b);
       this.m_engine.outStream().print(" f-" + valueVector.get(2).factIDValue());
-      if (b < paramVector.size() - 1)
-        this.m_engine.outStream().print(",");
+      if (b < paramVector.size() - 1) this.m_engine.outStream().print(",");
     }
     this.m_engine.outStream().println();
   }
@@ -79,8 +78,7 @@ public class Deffunction extends Context implements Userfunction {
     stringBuffer.append("[Deffunction: ");
     stringBuffer.append(RU.getAtom(this.m_name));
     stringBuffer.append(" ");
-    if (this.m_docstring != null)
-      stringBuffer.append("\"" + this.m_docstring + "\"; ");
+    if (this.m_docstring != null) stringBuffer.append("\"" + this.m_docstring + "\"; ");
     stringBuffer.append("]");
     return stringBuffer.toString();
   }

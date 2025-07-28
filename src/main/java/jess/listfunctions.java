@@ -12,11 +12,9 @@ class listfunctions implements Userfunction {
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
     ValueVector valueVector = new ValueVector(100);
     Enumeration enumeration = Funcall.listIntrinsics();
-    while (enumeration.hasMoreElements())
-      valueVector.add(new Value(enumeration.nextElement(), 1));
+    while (enumeration.hasMoreElements()) valueVector.add(new Value(enumeration.nextElement(), 1));
     enumeration = paramContext.engine().listDeffunctions();
-    while (enumeration.hasMoreElements())
-      valueVector.add(new Value(enumeration.nextElement(), 1));
+    while (enumeration.hasMoreElements()) valueVector.add(new Value(enumeration.nextElement(), 1));
     enumeration = paramContext.engine().listUserfunctions();
     while (enumeration.hasMoreElements()) {
       String str = enumeration.nextElement();
@@ -33,8 +31,7 @@ class listfunctions implements Userfunction {
           valueVector.set(value1, b2 + 1);
         }
       }
-      if (b1 <= 0)
-        return new Value(valueVector, 512);
+      if (b1 <= 0) return new Value(valueVector, 512);
     }
   }
 }

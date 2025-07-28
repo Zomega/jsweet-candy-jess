@@ -20,7 +20,8 @@ class _engine implements Userfunction {
   _engine(Rete paramRete) {
     try {
       this.m_engine = new Value(paramRete, 2048);
-    } catch (ReteException reteException) {}
+    } catch (ReteException reteException) {
+    }
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {

@@ -35,7 +35,14 @@ public abstract class Node1 extends Node {
 
   Value m_value;
 
-  Node1(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, Value paramValue, Rete paramRete) {
+  Node1(
+      int paramInt1,
+      int paramInt2,
+      int paramInt3,
+      int paramInt4,
+      int paramInt5,
+      Value paramValue,
+      Rete paramRete) {
     super(paramRete);
     this.m_command = paramInt1;
     this.R1 = paramInt2;
@@ -53,9 +60,17 @@ public abstract class Node1 extends Node {
     return false;
   }
 
-  void debugPrint(Token paramToken, int paramInt, ValueVector paramValueVector, boolean paramBoolean) throws ReteException {
+  void debugPrint(
+      Token paramToken, int paramInt, ValueVector paramValueVector, boolean paramBoolean)
+      throws ReteException {
     System.out.print("TEST " + toString() + ";ct=" + paramInt);
-    System.out.println(";id=" + paramValueVector.get(2).factIDValue() + ";tag=" + paramToken.m_tag + ";" + paramBoolean);
+    System.out.println(
+        ";id="
+            + paramValueVector.get(2).factIDValue()
+            + ";tag="
+            + paramToken.m_tag
+            + ";"
+            + paramBoolean);
   }
 
   public String toString() {
@@ -142,7 +157,15 @@ public abstract class Node1 extends Node {
     return stringBuffer.toString();
   }
 
-  static final Node1 create(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, Value paramValue, Rete paramRete) throws ReteException {
+  static final Node1 create(
+      int paramInt1,
+      int paramInt2,
+      int paramInt3,
+      int paramInt4,
+      int paramInt5,
+      Value paramValue,
+      Rete paramRete)
+      throws ReteException {
     switch (paramInt1) {
       case 7:
         return new Node1TMF(paramInt2, paramInt3, paramInt4, paramInt5, paramValue, paramRete);
@@ -172,11 +195,15 @@ public abstract class Node1 extends Node {
     throw new ReteException("Node1::create", "invalid command code:", String.valueOf(paramInt1));
   }
 
-  static final Node1 create(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, Rete paramRete) throws ReteException {
+  static final Node1 create(
+      int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, Rete paramRete)
+      throws ReteException {
     return create(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, null, paramRete);
   }
 
-  static final Node1 create(int paramInt1, Value paramValue, int paramInt2, int paramInt3, Rete paramRete) throws ReteException {
+  static final Node1 create(
+      int paramInt1, Value paramValue, int paramInt2, int paramInt3, Rete paramRete)
+      throws ReteException {
     return create(paramInt1, 0, 0, paramInt2, paramInt3, paramValue, paramRete);
   }
 }

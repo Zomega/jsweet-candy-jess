@@ -51,16 +51,12 @@ public class ValueVector implements Cloneable {
   }
 
   public boolean equals(Object paramObject) {
-    if (this == paramObject)
-      return true;
-    if (!(paramObject instanceof ValueVector))
-      return false;
-    ValueVector valueVector = (ValueVector)paramObject;
-    if (this.m_ptr != valueVector.m_ptr)
-      return false;
+    if (this == paramObject) return true;
+    if (!(paramObject instanceof ValueVector)) return false;
+    ValueVector valueVector = (ValueVector) paramObject;
+    if (this.m_ptr != valueVector.m_ptr) return false;
     for (int i = this.m_ptr - 1; i > -1; i--) {
-      if (!this.m_v[i].equals(valueVector.m_v[i]))
-        return false;
+      if (!this.m_v[i].equals(valueVector.m_v[i])) return false;
     }
     return true;
   }
@@ -68,8 +64,7 @@ public class ValueVector implements Cloneable {
   public String toString() {
     StringBuffer stringBuffer = new StringBuffer(100);
     for (byte b = 0; b < this.m_ptr; b++) {
-      if (b > 0)
-        stringBuffer.append(" ");
+      if (b > 0) stringBuffer.append(" ");
       stringBuffer.append(this.m_v[b]);
     }
     return stringBuffer.toString();

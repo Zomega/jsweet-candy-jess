@@ -21,7 +21,8 @@ public class LostDisplay extends Canvas implements ReteDisplay {
 
   public static final int COLS = 25;
 
-  public LostDisplay(PrintStream paramPrintStream, InputStream paramInputStream, Applet paramApplet) {
+  public LostDisplay(
+      PrintStream paramPrintStream, InputStream paramInputStream, Applet paramApplet) {
     this.m_app = paramApplet;
     priv_init(paramPrintStream, paramInputStream);
   }
@@ -36,8 +37,7 @@ public class LostDisplay extends Canvas implements ReteDisplay {
     this.m_is = paramInputStream;
     this.m_colors = new Color[3][25];
     for (byte b1 = 0; b1 < 3; b1++) {
-      for (byte b = 0; b < 25; b++)
-        this.m_colors[b1][b] = Color.black;
+      for (byte b = 0; b < 25; b++) this.m_colors[b1][b] = Color.black;
     }
     this.m_locations = new Rectangle[3][25];
     for (byte b2 = 0; b2 < 3; b2++) {
@@ -53,7 +53,8 @@ public class LostDisplay extends Canvas implements ReteDisplay {
   private void sleep(int paramInt) {
     try {
       Thread.sleep(paramInt);
-    } catch (InterruptedException interruptedException) {}
+    } catch (InterruptedException interruptedException) {
+    }
   }
 
   public void paint(Graphics paramGraphics) {

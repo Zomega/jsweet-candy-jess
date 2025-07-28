@@ -41,7 +41,7 @@ class NodeView implements ActionListener {
 
   Frame m_f;
 
-  Color[] ctColor = new Color[] { Color.blue, Color.orange, Color.green, Color.red };
+  Color[] ctColor = new Color[] {Color.blue, Color.orange, Color.green, Color.red};
 
   public NodeView(Node node, int row, int col, Vector v) {
     this.m_node = node;
@@ -107,14 +107,15 @@ class NodeView implements ActionListener {
   void describeNode() {
     StringBuffer sb = new StringBuffer(this.m_node.toString());
     if (this.m_node instanceof Node2) {
-      sb.append(((Node2)this.m_node).displayMemory());
+      sb.append(((Node2) this.m_node).displayMemory());
     } else if (this.m_node instanceof NodeTerm) {
       try {
         sb.append("\n\n");
-        sb.append(((NodeTerm)this.m_node).rule().ppRule());
+        sb.append(((NodeTerm) this.m_node).rule().ppRule());
         sb.append("\n\n");
-        sb.append(((NodeTerm)this.m_node).rule().listNodes());
-      } catch (ReteException re) {}
+        sb.append(((NodeTerm) this.m_node).rule().listNodes());
+      } catch (ReteException re) {
+      }
     }
     this.m_view.setText(sb.toString());
   }

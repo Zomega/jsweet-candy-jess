@@ -8,8 +8,8 @@ class substring implements Userfunction {
   }
 
   public Value call(ValueVector paramValueVector, Context paramContext) throws ReteException {
-    int i = (int)paramValueVector.get(1).numericValue() - 1;
-    int j = (int)paramValueVector.get(2).numericValue();
+    int i = (int) paramValueVector.get(1).numericValue() - 1;
+    int j = (int) paramValueVector.get(2).numericValue();
     String str = paramValueVector.get(3).stringValue();
     if (i < 0 || i > str.length() - 1 || j > str.length() || j <= 0)
       throw new ReteException("sub-string", "Indices must be between 1 and " + str.length(), "");

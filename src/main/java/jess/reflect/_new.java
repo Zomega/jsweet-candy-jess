@@ -22,7 +22,7 @@ class _new implements Userfunction {
       int i = paramValueVector.size() - 2;
       Object[] arrayOfObject = new Object[i];
       Class clazz = Class.forName(str);
-      Constructor[] arrayOfConstructor = (Constructor[])clazz.getConstructors();
+      Constructor[] arrayOfConstructor = (Constructor[]) clazz.getConstructors();
       Object object = null;
       for (byte b = 0; b < arrayOfConstructor.length; b++) {
         try {
@@ -30,15 +30,20 @@ class _new implements Userfunction {
           Class[] arrayOfClass = constructor.getParameterTypes();
           if (i == arrayOfClass.length) {
             for (byte b1 = 0; b1 < i; b1++)
-              arrayOfObject[b1] = ReflectFunctions.valueToObject(arrayOfClass[b1], paramValueVector.get(b1 + 2));
+              arrayOfObject[b1] =
+                  ReflectFunctions.valueToObject(arrayOfClass[b1], paramValueVector.get(b1 + 2));
             object = constructor.newInstance(arrayOfObject);
             return new Value(object, 2048);
           }
-        } catch (IllegalArgumentException illegalArgumentException) {}
+        } catch (IllegalArgumentException illegalArgumentException) {
+        }
       }
       throw new NoSuchMethodException(str);
     } catch (InvocationTargetException invocationTargetException) {
-      throw new ReteException("new", "Constructor threw an exception", invocationTargetException.getTargetException().toString());
+      throw new ReteException(
+          "new",
+          "Constructor threw an exception",
+          invocationTargetException.getTargetException().toString());
     } catch (NoSuchMethodException noSuchMethodException) {
       throw new ReteException("new", "Constructor not found", str);
     } catch (ClassNotFoundException classNotFoundException) {

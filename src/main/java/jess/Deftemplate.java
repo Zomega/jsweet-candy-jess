@@ -54,12 +54,10 @@ public class Deftemplate {
   }
 
   static int slotType(ValueVector paramValueVector, String paramString) throws ReteException {
-    if (paramValueVector.get(1).descriptorValue() != 256)
-      return 0;
+    if (paramValueVector.get(1).descriptorValue() != 256) return 0;
     int i = RU.putAtom(paramString);
     for (byte b = 3; b < paramValueVector.size(); b += 2) {
-      if (paramValueVector.get(b + 0).atomValue() == i)
-        return paramValueVector.get(b + 0).type();
+      if (paramValueVector.get(b + 0).atomValue() == i) return paramValueVector.get(b + 0).type();
     }
     return 0;
   }
@@ -71,8 +69,7 @@ public class Deftemplate {
       stringBuffer.append(RU.getAtom(this.m_name));
       stringBuffer.append(" ");
       stringBuffer.append((this.m_ordered == 128) ? "(ordered)" : "(unordered)");
-      if (this.m_docstring != null)
-        stringBuffer.append(" \"" + this.m_docstring + "\" ");
+      if (this.m_docstring != null) stringBuffer.append(" \"" + this.m_docstring + "\" ");
       if (this.m_ordered == 256) {
         stringBuffer.append("slots:");
         for (byte b = 3; b < this.m_deft.size(); b += 2) {

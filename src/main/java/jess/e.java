@@ -16,6 +16,7 @@ class e implements Userfunction {
   static {
     try {
       s_e = new Value(Math.E, 32);
-    } catch (ReteException reteException) {}
+    } catch (ReteException reteException) {
+    }
   }
 }

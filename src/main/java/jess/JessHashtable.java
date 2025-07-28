@@ -12,14 +12,16 @@ class JessHashtable {
   JessHashtable() {
     byte b = 101;
     this.m_table = new JessHashtableEntry[b];
-    this.m_threshold = (int)(b * this.m_loadFactor);
+    this.m_threshold = (int) (b * this.m_loadFactor);
   }
 
   synchronized String get(int paramInt) {
     JessHashtableEntry[] arrayOfJessHashtableEntry = this.m_table;
     int i = paramInt;
     int j = (i & Integer.MAX_VALUE) % arrayOfJessHashtableEntry.length;
-    for (JessHashtableEntry jessHashtableEntry = arrayOfJessHashtableEntry[j]; jessHashtableEntry != null; jessHashtableEntry = jessHashtableEntry.m_next) {
+    for (JessHashtableEntry jessHashtableEntry = arrayOfJessHashtableEntry[j];
+        jessHashtableEntry != null;
+        jessHashtableEntry = jessHashtableEntry.m_next) {
       if (jessHashtableEntry.m_hash == i && jessHashtableEntry.m_key == paramInt)
         return jessHashtableEntry.m_value;
     }
@@ -31,7 +33,7 @@ class JessHashtable {
     JessHashtableEntry[] arrayOfJessHashtableEntry1 = this.m_table;
     int j = i * 2 + 1;
     JessHashtableEntry[] arrayOfJessHashtableEntry2 = new JessHashtableEntry[j];
-    this.m_threshold = (int)(j * this.m_loadFactor);
+    this.m_threshold = (int) (j * this.m_loadFactor);
     this.m_table = arrayOfJessHashtableEntry2;
     int k = i;
     while (k-- > 0) {
@@ -47,12 +49,13 @@ class JessHashtable {
   }
 
   synchronized String put(int paramInt, String paramString) {
-    if (paramString == null)
-      throw new NullPointerException();
+    if (paramString == null) throw new NullPointerException();
     JessHashtableEntry[] arrayOfJessHashtableEntry = this.m_table;
     int i = paramInt;
     int j = (i & Integer.MAX_VALUE) % arrayOfJessHashtableEntry.length;
-    for (JessHashtableEntry jessHashtableEntry1 = arrayOfJessHashtableEntry[j]; jessHashtableEntry1 != null; jessHashtableEntry1 = jessHashtableEntry1.m_next) {
+    for (JessHashtableEntry jessHashtableEntry1 = arrayOfJessHashtableEntry[j];
+        jessHashtableEntry1 != null;
+        jessHashtableEntry1 = jessHashtableEntry1.m_next) {
       if (jessHashtableEntry1.m_hash == i && jessHashtableEntry1.m_key == paramInt) {
         String str = jessHashtableEntry1.m_value;
         jessHashtableEntry1.m_value = paramString;

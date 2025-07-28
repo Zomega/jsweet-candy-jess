@@ -22,7 +22,8 @@ class _retract implements Userfunction {
               Funcall funcall = new Funcall("undefinstance", rete);
               funcall.add(value1);
               Funcall.simpleExecute(funcall, rete.globalContext());
-            } catch (Exception exception) {}
+            } catch (Exception exception) {
+            }
           rete._retract(valueVector);
         }
       }
